@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { useRecipes, Recipe, Ingredient, RecipeStep } from '../hooks/useRecipes';
 import { Button } from '../components/ui/Button';
+import { generateId } from '../lib/utils';
 
 const CATEGORIES = [
   'Hauptgericht', 'Vorspeise', 'Beilage', 'Dessert', 'Frühstück',
@@ -24,8 +25,6 @@ const DIFFICULTIES: { value: Recipe['difficulty']; label: string }[] = [
 ];
 
 const UNITS = ['g', 'kg', 'ml', 'L', 'Stk', 'EL', 'TL', 'Prise', 'Bund', 'Scheiben', 'Tasse', 'Dose', 'Packung'];
-
-const generateId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
 export const RecipeFormPage: React.FC = () => {
   const navigate = useNavigate();

@@ -115,6 +115,7 @@ export const PlannerPage: React.FC = () => {
     generateShoppingList,
     getWeeklyStats,
     clearWeek,
+    copyWeekTo,
   } = useMealPlanner();
   
   const { recipes } = useRecipes();
@@ -229,27 +230,14 @@ export const PlannerPage: React.FC = () => {
     setShowTemplates(false);
   };
 
-  // Copy current week to target week
+  // Copy current week to target week via hook
   const handleCopyWeek = () => {
     if (targetWeekOffset === null || plannedMeals.length === 0) return;
 
     const targetDate = new Date(currentWeek);
     targetDate.setDate(targetDate.getDate() + targetWeekOffset * 7);
+    copyWeekTo(targetDate);
 
-    // Build localStorage key for target week
-    const d = new Date(targetDate);
-    const day = d.getDay();
-    const diff = d.getDate() - day + (day === 0 ? -6 : 1);
-    const weekStart = new Date(d.setDate(diff));
-    const key = `kochplan_meal_planner_${weekStart.toISOString().split('T')[0]}`;
-
-    // Copy meals with new IDs
-    const copiedMeals = plannedMeals.map(meal => ({
-      ...meal,
-      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-    }));
-
-    localStorage.setItem(key, JSON.stringify(copiedMeals));
     setCopySuccess(true);
     setTimeout(() => setCopySuccess(false), 2000);
     setShowCopyDialog(false);
