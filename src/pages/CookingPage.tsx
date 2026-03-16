@@ -228,10 +228,18 @@ export const CookingPage: React.FC = () => {
   // Read current step aloud
   const readCurrentStep = useCallback(() => {
     if (currentStep && speechEnabled) {
+      cancel(); // Stop any ongoing speech
       const text = `Schritt ${currentStepIndex + 1} von ${steps.length}. ${currentStep.description}`;
       speak(text);
     }
-  }, [currentStep, currentStepIndex, steps.length, speechEnabled, speak]);
+  }, [currentStep, currentStepIndex, steps.length, speechEnabled, speak, cancel]);
+
+  // Auto-read step when step changes or speech is toggled on
+  useEffect(() => {
+    if (speechEnabled && currentStep) {
+      readCurrentStep();
+    }
+  }, [currentStepIndex, speechEnabled]);
 
   const handleExit = () => {
     if (window.confirm('Möchtest du den Koch-Modus wirklich beenden?')) {
@@ -481,9 +489,18 @@ export const CookingPage: React.FC = () => {
               </span>
             </div>
 
-            <p className="text-2xl md:text-3xl font-medium leading-relaxed mb-8">
+            <p className="text-2xl md:text-3xl font-medium leading-relaxed mb-4">
               {currentStep.description}
             </p>
+
+            <button
+              onClick={readCurrentStep}
+              className="mb-4 px-4 py-2 bg-gray-800 rounded-lg text-sm flex items-center gap-2 hover:bg-gray-700 transition-colors mx-auto"
+              title="Schritt vorlesen"
+            >
+              <Volume2 className="w-4 h-4 text-orange-400" />
+              {speaking ? 'Wird vorgelesen...' : 'Vorlesen'}
+            </button>
 
             {currentStep.duration && (
               <button

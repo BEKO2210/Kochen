@@ -124,6 +124,8 @@ export const PlannerPage: React.FC = () => {
   const [showCopyDialog, setShowCopyDialog] = useState(false);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [targetWeekOffset, setTargetWeekOffset] = useState<number | null>(null);
+  const [copySuccess, setCopySuccess] = useState(false);
+  const [templateSuccess, setTemplateSuccess] = useState('');
 
   const weekDates = getWeekDates();
   const days: DayOfWeek[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
@@ -182,12 +184,84 @@ export const PlannerPage: React.FC = () => {
   // Stats
   const stats = getWeeklyStats();
 
+  // Apply template: fill week with matching recipes
+  const applyTemplate = (templateId: string) => {
+    if (recipes.length === 0) return;
+
+    // Filter recipes by template criteria
+    let filtered = [...recipes];
+    if (templateId === 'vegetarian') {
+      filtered = recipes.filter(r => r.tags.some(t => t.toLowerCase().includes('vegetarisch') || t.toLowerCase().includes('vegan')));
+    } else if (templateId === 'quick') {
+      filtered = recipes.filter(r => (r.prepTime + r.cookTime) <= 30);
+    } else if (templateId === 'family') {
+      filtered = recipes.filter(r => r.difficulty === 'easy' && r.servings >= 4);
+    }
+
+    // Fallback to all recipes if filter yields nothing
+    if (filtered.length === 0) filtered = [...recipes];
+
+    // Clear current week first
+    clearWeek();
+
+    // Fill lunch and dinner for each day
+    const shuffled = filtered.sort(() => Math.random() - 0.5);
+    let recipeIdx = 0;
+    const daysToFill: DayOfWeek[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+    const mealsToFill: MealType[] = ['lunch', 'dinner'];
+
+    for (const day of daysToFill) {
+      for (const mealType of mealsToFill) {
+        const recipe = shuffled[recipeIdx % shuffled.length];
+        addMeal(recipe, day, mealType, recipe.servings);
+        recipeIdx++;
+      }
+    }
+
+    const labels: Record<string, string> = {
+      vegetarian: 'Vegetarische Woche',
+      quick: 'Schnelle Woche',
+      family: 'Familienwoche',
+      mealprep: 'Meal Prep Woche',
+    };
+    setTemplateSuccess(labels[templateId] || 'Vorlage');
+    setTimeout(() => setTemplateSuccess(''), 2000);
+    setShowTemplates(false);
+  };
+
+  // Copy current week to target week
+  const handleCopyWeek = () => {
+    if (targetWeekOffset === null || plannedMeals.length === 0) return;
+
+    const targetDate = new Date(currentWeek);
+    targetDate.setDate(targetDate.getDate() + targetWeekOffset * 7);
+
+    // Build localStorage key for target week
+    const d = new Date(targetDate);
+    const day = d.getDay();
+    const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+    const weekStart = new Date(d.setDate(diff));
+    const key = `kochplan_meal_planner_${weekStart.toISOString().split('T')[0]}`;
+
+    // Copy meals with new IDs
+    const copiedMeals = plannedMeals.map(meal => ({
+      ...meal,
+      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+    }));
+
+    localStorage.setItem(key, JSON.stringify(copiedMeals));
+    setCopySuccess(true);
+    setTimeout(() => setCopySuccess(false), 2000);
+    setShowCopyDialog(false);
+    setTargetWeekOffset(null);
+  };
+
   // Templates
   const templates = [
-    { id: 'vegetarian', name: 'Vegetarische Woche', description: '7 vegetarische Gerichte' },
-    { id: 'quick', name: 'Schnelle Woche', description: 'Gerichte unter 30 Minuten' },
-    { id: 'family', name: 'Familienwoche', description: 'Kinderfreundliche Gerichte' },
-    { id: 'mealprep', name: 'Meal Prep', description: 'Optimal für Vorbereitung' },
+    { id: 'vegetarian', name: 'Vegetarische Woche', description: 'Füllt Mittag- und Abendessen mit vegetarischen Rezepten' },
+    { id: 'quick', name: 'Schnelle Woche', description: 'Nur Rezepte unter 30 Minuten Gesamtzeit' },
+    { id: 'family', name: 'Familienwoche', description: 'Einfache Gerichte mit ≥4 Portionen' },
+    { id: 'mealprep', name: 'Zufällig füllen', description: 'Zufällige Auswahl aus allen Rezepten' },
   ];
 
   if (isLoading) {
@@ -366,10 +440,7 @@ export const PlannerPage: React.FC = () => {
               {templates.map((template) => (
                 <button
                   key={template.id}
-                  onClick={() => {
-                    // Apply template logic here
-                    setShowTemplates(false);
-                  }}
+                  onClick={() => applyTemplate(template.id)}
                   className="w-full p-4 bg-amber-50 hover:bg-amber-100 rounded-xl text-left transition-colors"
                 >
                   <p className="font-medium text-amber-950">{template.name}</p>
@@ -433,18 +504,28 @@ export const PlannerPage: React.FC = () => {
               </Button>
               <Button
                 variant="primary"
-                onClick={() => {
-                  // Copy week logic here
-                  setShowCopyDialog(false);
-                  setTargetWeekOffset(null);
-                }}
-                disabled={targetWeekOffset === null}
+                onClick={handleCopyWeek}
+                disabled={targetWeekOffset === null || plannedMeals.length === 0}
                 className="flex-1"
               >
                 Kopieren
               </Button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Success Toasts */}
+      {copySuccess && (
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 z-50">
+          <Copy className="w-4 h-4" />
+          Woche erfolgreich kopiert!
+        </div>
+      )}
+      {templateSuccess && (
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 z-50">
+          <LayoutTemplate className="w-4 h-4" />
+          {templateSuccess} angewendet!
         </div>
       )}
 
