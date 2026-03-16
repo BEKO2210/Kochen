@@ -62,7 +62,7 @@ export function RecipeCard({
 }: RecipeCardProps) {
   const [isFavorite, setIsFavorite] = useState(recipe.isFavorite ?? false);
   const [imageError, setImageError] = useState(false);
-  const recipeImage = recipeImage || recipeImageUrl;
+  const recipeImage = recipe.image || recipe.imageUrl;
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
