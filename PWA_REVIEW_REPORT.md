@@ -1,6 +1,6 @@
 # PWA Review Report: KochPlan
 
-**Review Date:** 2024  
+**Review Date:** 2026 
 **App Name:** KochPlan - Dein intelligenter Essensplaner  
 **Reviewer:** PWA Performance Reviewer
 
