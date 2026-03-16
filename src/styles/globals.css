@@ -1,0 +1,487 @@
+/* KochPlan Global Styles */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+  /* Primary Colors */
+  --color-primary: #F97316;
+  --color-primary-light: #FB923C;
+  --color-primary-dark: #EA580C;
+  --color-primary-subtle: #FFF7ED;
+  
+  /* Secondary Colors */
+  --color-secondary: #92400E;
+  --color-secondary-light: #B45309;
+  
+  /* Background Colors */
+  --color-background: #FFFBEB;
+  --color-background-card: #FFFFFF;
+  --color-background-elevated: #FEF3C7;
+  
+  /* Text Colors */
+  --color-text: #451A03;
+  --color-text-secondary: #78350F;
+  --color-text-muted: #A16207;
+  --color-text-inverse: #FFFFFF;
+  
+  /* Semantic Colors */
+  --color-success: #22C55E;
+  --color-success-light: #DCFCE7;
+  --color-warning: #EAB308;
+  --color-warning-light: #FEF9C3;
+  --color-error: #EF4444;
+  --color-error-light: #FEE2E2;
+  --color-info: #3B82F6;
+  
+  /* Accent Colors */
+  --color-accent-cream: #FEF3C7;
+  --color-accent-warm: #FDE68A;
+  --color-accent-border: #FCD34D;
+  
+  /* Kitchen Mode Colors */
+  --kitchen-bg: #1A1A1A;
+  --kitchen-card: #262626;
+  --kitchen-elevated: #404040;
+  --kitchen-text: #FFFFFF;
+  --kitchen-muted: #A3A3A3;
+  
+  /* Spacing Scale (Base: 4px) */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  
+  /* Border Radius */
+  --radius-none: 0;
+  --radius-sm: 0.25rem;   /* 4px */
+  --radius-md: 0.5rem;    /* 8px */
+  --radius-lg: 0.75rem;   /* 12px */
+  --radius-xl: 1rem;      /* 16px */
+  --radius-2xl: 1.5rem;   /* 24px */
+  --radius-full: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-warm: 0 4px 14px rgba(249, 115, 22, 0.15);
+  --shadow-warm-lg: 0 8px 24px rgba(249, 115, 22, 0.2);
+  --shadow-inner-warm: inset 0 2px 4px rgba(249, 115, 22, 0.06);
+  
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  
+  /* Touch Targets */
+  --touch-min: 44px;
+  --touch-kitchen: 64px;
+  --touch-button-kitchen: 80px;
+  
+  /* Z-Index Scale */
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-nav: 30;
+  --z-modal: 40;
+  --z-popover: 50;
+  --z-toast: 60;
+  --z-overlay: 70;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 200ms ease-in-out;
+  --transition-slow: 300ms ease-in-out;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-background);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.125rem; }
+
+@media (min-width: 768px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+}
+
+@media (min-width: 1024px) {
+  h1 { font-size: 2.25rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.75rem; }
+}
+
+p {
+  margin-bottom: var(--space-4);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+}
+
+/* ============================================
+   Form Elements
+   ============================================ */
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+/* Remove default button styles */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+/* Line Clamp */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Tabular Numbers (for timers) */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Touch Action */
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
+/* Safe Area (for notched devices) */
+.safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-left {
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-area-right {
+  padding-right: env(safe-area-inset-right);
+}
+
+/* ============================================
+   Kitchen Mode Styles
+   ============================================ */
+.kitchen-mode {
+  background-color: var(--kitchen-bg);
+  color: var(--kitchen-text);
+  min-height: 100vh;
+}
+
+.kitchen-mode h1,
+.kitchen-mode h2,
+.kitchen-mode h3,
+.kitchen-mode h4,
+.kitchen-mode h5,
+.kitchen-mode h6 {
+  color: var(--kitchen-text);
+}
+
+.kitchen-card {
+  background-color: var(--kitchen-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+}
+
+.kitchen-button {
+  min-width: var(--touch-button-kitchen);
+  min-height: var(--touch-button-kitchen);
+  font-size: 1.5rem;
+  font-weight: 600;
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kitchen-touch {
+  min-width: var(--touch-kitchen);
+  min-height: var(--touch-kitchen);
+}
+
+.kitchen-text {
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.kitchen-text-lg {
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+.kitchen-timer {
+  font-size: 5rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Animation Utilities
+   ============================================ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* ============================================
+   Scrollbar Styling
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background-elevated);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent-border);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-light);
+}
+
+/* Hide scrollbar for mobile */
+@media (max-width: 640px) {
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ============================================
+   Focus Styles (Accessibility)
+   ============================================ */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-primary);
+  color: white;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  z-index: 9999;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .recipe-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   Dark Mode Support (System Preference)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+  /* Optional: System-level dark mode support */
+  /* Note: Kitchen mode is the app's dark mode */
+}
+
+/* ============================================
+   High Contrast Mode
+   ============================================ */
+@media (prefers-contrast: high) {
+  :root {
+    --color-text: #000000;
+    --color-background: #FFFFFF;
+    --color-primary: #D97706;
+  }
+  
+  .kitchen-mode {
+    --kitchen-text: #FFFFFF;
+    --kitchen-bg: #000000;
+    --kitchen-card: #1A1A1A;
+  }
+}

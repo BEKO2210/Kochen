@@ -1,0 +1,386 @@
+/* ============================================
+   COOKING STEP - Kitchen-Friendly Design
+   ============================================ */
+
+.cooking-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--cooking-spacing);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ============================================
+   STEP HEADER
+   ============================================ */
+.cooking-step__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--cooking-spacing-lg);
+  flex-wrap: wrap;
+  gap: var(--cooking-spacing);
+}
+
+.cooking-step__number {
+  font-size: var(--cooking-font-xl);
+  font-weight: 700;
+  color: var(--cooking-accent);
+}
+
+.cooking-step__total {
+  font-size: var(--cooking-font-lg);
+  font-weight: 400;
+  color: var(--cooking-text-muted);
+}
+
+/* Action Buttons */
+.cooking-step__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.cooking-step__action-btn {
+  width: var(--cooking-touch-min);
+  height: var(--cooking-touch-min);
+  min-width: var(--cooking-touch-min);
+  min-height: var(--cooking-touch-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cooking-bg-tertiary);
+  color: var(--cooking-text);
+  border: 2px solid transparent;
+  border-radius: var(--cooking-border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cooking-step__action-btn:hover {
+  background-color: var(--cooking-bg-secondary);
+  border-color: var(--cooking-accent);
+  transform: scale(1.05);
+}
+
+.cooking-step__action-btn.active {
+  background-color: var(--cooking-accent);
+  color: white;
+  animation: pulse-speaking 1.5s infinite;
+}
+
+@keyframes pulse-speaking {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
+  }
+  50% { 
+    box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+  }
+}
+
+.cooking-step__action-btn:focus {
+  outline: 3px solid var(--cooking-accent);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   STEP CONTENT
+   ============================================ */
+.cooking-step__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cooking-spacing-lg);
+}
+
+/* Main Instruction */
+.cooking-step__instruction {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  line-height: 1.5;
+  color: var(--cooking-text);
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Timer Info */
+.cooking-step__timer-info {
+  display: flex;
+  align-items: center;
+  gap: var(--cooking-spacing);
+  padding: var(--cooking-spacing);
+  background-color: var(--cooking-bg-secondary);
+  border-radius: var(--cooking-border-radius);
+  border-left: 4px solid var(--cooking-warning);
+}
+
+.cooking-step__timer-info svg {
+  color: var(--cooking-warning);
+  flex-shrink: 0;
+}
+
+.cooking-step__timer-info span {
+  font-size: var(--cooking-font-lg);
+  color: var(--cooking-text);
+}
+
+.cooking-step__timer-quick {
+  margin-left: auto;
+  padding: 12px 20px;
+  background-color: var(--cooking-warning);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.cooking-step__timer-quick:hover {
+  background-color: #FFB74D;
+  transform: scale(1.05);
+}
+
+/* Tip */
+.cooking-step__tip {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--cooking-spacing);
+  padding: var(--cooking-spacing);
+  background-color: rgba(33, 150, 243, 0.1);
+  border-radius: var(--cooking-border-radius);
+  border-left: 4px solid #2196F3;
+}
+
+.cooking-step__tip svg {
+  color: #2196F3;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cooking-step__tip p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--cooking-text-secondary);
+  line-height: 1.5;
+}
+
+/* Ingredients for this step */
+.cooking-step__ingredients {
+  padding: var(--cooking-spacing);
+  background-color: var(--cooking-bg-secondary);
+  border-radius: var(--cooking-border-radius);
+}
+
+.cooking-step__ingredients-title {
+  margin: 0 0 var(--cooking-spacing) 0;
+  font-size: 1.1rem;
+  color: var(--cooking-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cooking-step__ingredients-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cooking-step__ingredient {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  color: var(--cooking-text);
+}
+
+.cooking-step__ingredient svg {
+  color: var(--cooking-accent);
+  flex-shrink: 0;
+}
+
+/* ============================================
+   TIMER MODAL
+   ============================================ */
+.cooking-step__modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--cooking-spacing);
+  z-index: 200;
+}
+
+.cooking-step__modal {
+  background-color: var(--cooking-bg-secondary);
+  border-radius: var(--cooking-border-radius);
+  padding: var(--cooking-spacing-lg);
+  width: 100%;
+  max-width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.cooking-step__modal-title {
+  margin: 0 0 var(--cooking-spacing-lg) 0;
+  font-size: var(--cooking-font-lg);
+  color: var(--cooking-text);
+  text-align: center;
+}
+
+/* Timer Presets */
+.cooking-step__timer-presets {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: var(--cooking-spacing-lg);
+}
+
+.cooking-step__timer-preset {
+  padding: 16px 8px;
+  background-color: var(--cooking-bg-tertiary);
+  color: var(--cooking-text);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cooking-step__timer-preset:hover {
+  background-color: var(--cooking-accent);
+  border-color: var(--cooking-accent);
+  transform: scale(1.05);
+}
+
+.cooking-step__timer-preset:focus {
+  outline: 2px solid var(--cooking-accent);
+  outline-offset: 2px;
+}
+
+/* Custom Timer */
+.cooking-step__timer-custom {
+  display: flex;
+  gap: 10px;
+  margin-bottom: var(--cooking-spacing-lg);
+}
+
+.cooking-step__timer-input {
+  flex: 1;
+  padding: 16px;
+  background-color: var(--cooking-bg);
+  color: var(--cooking-text);
+  border: 2px solid var(--cooking-bg-tertiary);
+  border-radius: 8px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.cooking-step__timer-input:focus {
+  outline: none;
+  border-color: var(--cooking-accent);
+}
+
+.cooking-step__timer-input::placeholder {
+  color: var(--cooking-text-muted);
+}
+
+.cooking-step__timer-btn {
+  padding: 16px 24px;
+  background-color: var(--cooking-accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.cooking-step__timer-btn:hover:not(:disabled) {
+  background-color: var(--cooking-accent-hover);
+}
+
+.cooking-step__timer-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cooking-step__modal-close {
+  width: 100%;
+  padding: 16px;
+  background-color: transparent;
+  color: var(--cooking-text-secondary);
+  border: 2px solid var(--cooking-bg-tertiary);
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cooking-step__modal-close:hover {
+  background-color: var(--cooking-bg-tertiary);
+  color: var(--cooking-text);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 480px) {
+  .cooking-step {
+    padding: 12px;
+  }
+  
+  .cooking-step__header {
+    margin-bottom: var(--cooking-spacing);
+  }
+  
+  .cooking-step__number {
+    font-size: var(--cooking-font-lg);
+  }
+  
+  .cooking-step__instruction {
+    font-size: 1.3rem;
+  }
+  
+  .cooking-step__timer-presets {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .cooking-step__timer-info {
+    flex-wrap: wrap;
+  }
+  
+  .cooking-step__timer-quick {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .cooking-step__action-btn.active {
+    animation: none;
+  }
+  
+  .cooking-step__action-btn,
+  .cooking-step__timer-quick,
+  .cooking-step__timer-preset,
+  .cooking-step__timer-btn {
+    transition: none;
+  }
+}

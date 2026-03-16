@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    
+    <!-- Viewport & Mobile Optimization -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
+    
+    <!-- Theme Color for Browser UI -->
+    <meta name="theme-color" content="#F97316" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1A1A1A" media="(prefers-color-scheme: dark)" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#F97316" />
+    
+    <!-- Apple PWA Configuration -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="KochPlan" />
+    
+    <!-- Microsoft PWA Configuration -->
+    <meta name="msapplication-TileColor" content="#F97316" />
+    <meta name="msapplication-TileImage" content="/icons/mstile-144x144.png" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    
+    <!-- SEO Meta Tags -->
+    <title>KochPlan - Dein intelligenter Essensplaner</title>
+    <meta name="description" content="Plane deine Mahlzeiten, verwalte deine Einkaufslisten und entdecke neue Rezepte mit KochPlan - deiner smarten Küchen-App." />
+    <meta name="keywords" content="Essensplaner, Einkaufsliste, Rezepte, Mahlzeitenplanung, Küche, Kochen, Meal Planner" />
+    <meta name="author" content="KochPlan Team" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kochplan.app/" />
+    <meta property="og:title" content="KochPlan - Dein intelligenter Essensplaner" />
+    <meta property="og:description" content="Plane deine Mahlzeiten, verwalte deine Einkaufslisten und entdecke neue Rezepte mit KochPlan." />
+    <meta property="og:image" content="https://kochplan.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="de_DE" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://kochplan.app/" />
+    <meta property="twitter:title" content="KochPlan - Dein intelligenter Essensplaner" />
+    <meta property="twitter:description" content="Plane deine Mahlzeiten, verwalte deine Einkaufslisten und entdecke neue Rezepte mit KochPlan." />
+    <meta property="twitter:image" content="https://kochplan.app/twitter-image.png" />
+    
+    <!-- Preconnect to External Resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="/src/main.tsx" as="script" type="module" />
+    
+    <!-- Safe Area Insets for Notch Devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    
+    <!-- Format Detection -->
+    <meta name="format-detection" content="telephone=no" />
+    
+    <!-- Generator -->
+    <meta name="generator" content="Vite + React + TypeScript" />
+    
+    <!-- Application Name -->
+    <meta name="application-name" content="KochPlan" />
+    
+    <!-- Color Scheme -->
+    <meta name="color-scheme" content="light dark" />
+    
+    <!-- Supports Color Schemes -->
+    <meta name="supports-color-schemes" content="light dark" />
+    
+    <style>
+      /* Critical CSS for Initial Load */
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+      
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+      }
+      
+      html {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+      
+      body {
+        background-color: #FFFBEB;
+        color: #1F2937;
+        overflow-x: hidden;
+      }
+      
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #1A1A1A;
+          color: #F5F5F5;
+        }
+      }
+      
+      /* Loading State */
+      #root:empty::before {
+        content: '';
+        display: block;
+        width: 48px;
+        height: 48px;
+        border: 4px solid #FED7AA;
+        border-top-color: #F97316;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      
+      @keyframes spin {
+        to { transform: translate(-50%, -50%) rotate(360deg); }
+      }
+      
+      /* Prevent FOUC */
+      .no-fouc {
+        visibility: hidden;
+      }
+      
+      /* Safe Area Support */
+      .safe-area-top {
+        padding-top: env(safe-area-inset-top);
+      }
+      
+      .safe-area-bottom {
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+      
+      .safe-area-left {
+        padding-left: env(safe-area-inset-left);
+      }
+      
+      .safe-area-right {
+        padding-right: env(safe-area-inset-right);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js', { scope: '/' })
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+    
+    <!-- Main Application Script -->
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Noscript Fallback -->
+    <noscript>
+      <div style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 2rem;
+        text-align: center;
+        font-family: 'Inter', system-ui, sans-serif;
+        background-color: #FFFBEB;
+        color: #1F2937;
+      ">
+        <h1 style="color: #F97316; margin-bottom: 1rem;">JavaScript erforderlich</h1>
+        <p>KochPlan benötigt JavaScript, um zu funktionieren. Bitte aktiviere JavaScript in deinen Browsereinstellungen.</p>
+      </div>
+    </noscript>
+  </body>
+</html>

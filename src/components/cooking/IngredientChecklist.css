@@ -1,0 +1,484 @@
+/* ============================================
+   INGREDIENT CHECKLIST - Kitchen-Friendly Design
+   ============================================ */
+
+.ingredient-checklist {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--cooking-bg);
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+  overflow: hidden;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.ingredient-checklist__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--cooking-spacing);
+  background-color: var(--cooking-bg-secondary);
+  border-bottom: 2px solid var(--cooking-bg-tertiary);
+  flex-shrink: 0;
+}
+
+.ingredient-checklist__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: var(--cooking-font-lg);
+  color: var(--cooking-text);
+}
+
+.ingredient-checklist__title svg {
+  color: var(--cooking-accent);
+}
+
+.ingredient-checklist__close {
+  width: var(--cooking-touch-min);
+  height: var(--cooking-touch-min);
+  min-width: var(--cooking-touch-min);
+  min-height: var(--cooking-touch-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cooking-bg-tertiary);
+  color: var(--cooking-text);
+  border: none;
+  border-radius: var(--cooking-border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ingredient-checklist__close:hover {
+  background-color: var(--cooking-danger);
+  color: white;
+}
+
+.ingredient-checklist__close:focus {
+  outline: 2px solid var(--cooking-accent);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   PROGRESS BAR
+   ============================================ */
+.ingredient-checklist__progress {
+  position: relative;
+  height: 36px;
+  background-color: var(--cooking-bg-tertiary);
+  margin: var(--cooking-spacing);
+  border-radius: 18px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.ingredient-checklist__progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--cooking-accent) 0%, #66BB6A 100%);
+  border-radius: 18px;
+  transition: width 0.3s ease;
+}
+
+.ingredient-checklist__progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cooking-text);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  white-space: nowrap;
+}
+
+/* ============================================
+   FILTERS
+   ============================================ */
+.ingredient-checklist__filters {
+  display: flex;
+  gap: 8px;
+  padding: 0 var(--cooking-spacing) var(--cooking-spacing);
+  flex-shrink: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ingredient-checklist__filter {
+  padding: 10px 16px;
+  background-color: var(--cooking-bg-tertiary);
+  color: var(--cooking-text-secondary);
+  border: 2px solid transparent;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.ingredient-checklist__filter:hover {
+  background-color: var(--cooking-bg-secondary);
+  color: var(--cooking-text);
+}
+
+.ingredient-checklist__filter.active {
+  background-color: var(--cooking-accent);
+  color: white;
+  border-color: var(--cooking-accent);
+}
+
+.ingredient-checklist__filter:focus {
+  outline: 2px solid var(--cooking-accent);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   ACTIONS
+   ============================================ */
+.ingredient-checklist__actions {
+  display: flex;
+  gap: var(--cooking-spacing);
+  padding: 0 var(--cooking-spacing) var(--cooking-spacing);
+  flex-shrink: 0;
+}
+
+.ingredient-checklist__action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  background-color: var(--cooking-bg-tertiary);
+  color: var(--cooking-text);
+  border: 2px solid transparent;
+  border-radius: var(--cooking-border-radius);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ingredient-checklist__action-btn:hover:not(:disabled) {
+  background-color: var(--cooking-bg-secondary);
+  border-color: var(--cooking-accent);
+}
+
+.ingredient-checklist__action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ingredient-checklist__action-btn svg {
+  flex-shrink: 0;
+}
+
+/* ============================================
+   LIST
+   ============================================ */
+.ingredient-checklist__list {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 var(--cooking-spacing);
+}
+
+.ingredient-checklist__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--cooking-spacing-lg);
+  color: var(--cooking-text-muted);
+  text-align: center;
+  gap: var(--cooking-spacing);
+}
+
+.ingredient-checklist__empty svg {
+  opacity: 0.5;
+}
+
+.ingredient-checklist__empty p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.ingredient-checklist__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ============================================
+   LIST ITEM
+   ============================================ */
+.ingredient-checklist__item {
+  background-color: var(--cooking-bg-secondary);
+  border-radius: var(--cooking-border-radius);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.ingredient-checklist__item:hover {
+  background-color: var(--cooking-bg-tertiary);
+}
+
+.ingredient-checklist__item.checked {
+  opacity: 0.5;
+}
+
+.ingredient-checklist__label {
+  display: flex;
+  align-items: center;
+  gap: var(--cooking-spacing);
+  padding: var(--cooking-spacing);
+  cursor: pointer;
+  min-height: var(--cooking-touch-min);
+}
+
+.ingredient-checklist__checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.ingredient-checklist__checkmark {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cooking-bg);
+  border: 2px solid var(--cooking-text-muted);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.ingredient-checklist__checkbox:checked + .ingredient-checklist__checkmark,
+.ingredient-checklist__item.checked .ingredient-checklist__checkmark {
+  background-color: var(--cooking-accent);
+  border-color: var(--cooking-accent);
+  color: white;
+}
+
+.ingredient-checklist__checkbox:focus + .ingredient-checklist__checkmark {
+  outline: 2px solid var(--cooking-accent);
+  outline-offset: 2px;
+}
+
+.ingredient-checklist__content {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  min-width: 0;
+}
+
+.ingredient-checklist__amount {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--cooking-accent);
+  white-space: nowrap;
+}
+
+.ingredient-checklist__name {
+  font-size: 1.1rem;
+  color: var(--cooking-text);
+  flex: 1;
+  min-width: 0;
+}
+
+.ingredient-checklist__item.checked .ingredient-checklist__name {
+  text-decoration: line-through;
+  color: var(--cooking-text-muted);
+}
+
+.ingredient-checklist__notes {
+  font-size: 14px;
+  color: var(--cooking-text-muted);
+  width: 100%;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.ingredient-checklist__footer {
+  padding: var(--cooking-spacing);
+  background-color: var(--cooking-bg-secondary);
+  border-top: 2px solid var(--cooking-bg-tertiary);
+  flex-shrink: 0;
+}
+
+.ingredient-checklist__continue {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px;
+  background-color: var(--cooking-accent);
+  color: white;
+  border: none;
+  border-radius: var(--cooking-border-radius);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ingredient-checklist__continue:hover {
+  background-color: var(--cooking-accent-hover);
+  transform: scale(1.02);
+}
+
+.ingredient-checklist__continue:focus {
+  outline: 3px solid white;
+  outline-offset: 2px;
+}
+
+/* ============================================
+   COMPACT CHECKLIST
+   ============================================ */
+.compact-checklist {
+  background-color: var(--cooking-bg-secondary);
+  border-radius: var(--cooking-border-radius);
+  padding: var(--cooking-spacing);
+}
+
+.compact-checklist__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.compact-checklist__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: var(--cooking-bg);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.compact-checklist__item:hover {
+  background-color: var(--cooking-bg-tertiary);
+}
+
+.compact-checklist__item.checked {
+  opacity: 0.5;
+}
+
+.compact-checklist__checkbox {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  min-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cooking-bg-tertiary);
+  border: 2px solid var(--cooking-text-muted);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.compact-checklist__item.checked .compact-checklist__checkbox {
+  background-color: var(--cooking-accent);
+  border-color: var(--cooking-accent);
+  color: white;
+}
+
+.compact-checklist__text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.compact-checklist__amount {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cooking-accent);
+}
+
+.compact-checklist__name {
+  font-size: 14px;
+  color: var(--cooking-text);
+}
+
+.compact-checklist__item.checked .compact-checklist__name {
+  text-decoration: line-through;
+  color: var(--cooking-text-muted);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 480px) {
+  .ingredient-checklist__filters {
+    padding-bottom: 12px;
+  }
+  
+  .ingredient-checklist__filter {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .ingredient-checklist__action-btn {
+    padding: 12px;
+    font-size: 13px;
+  }
+  
+  .ingredient-checklist__label {
+    padding: 12px;
+  }
+  
+  .ingredient-checklist__amount,
+  .ingredient-checklist__name {
+    font-size: 1rem;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .ingredient-checklist__progress-bar,
+  .ingredient-checklist__item,
+  .ingredient-checklist__checkmark,
+  .compact-checklist__item,
+  .compact-checklist__checkbox {
+    transition: none;
+  }
+  
+  .ingredient-checklist__continue:hover {
+    transform: none;
+  }
+}

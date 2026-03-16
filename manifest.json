@@ -1,0 +1,216 @@
+{
+  "name": "KochPlan - Dein smarter Rezeptplaner",
+  "short_name": "KochPlan",
+  "description": "Plane deine Mahlzeiten, verwalte Rezepte und erstelle Einkaufslisten - auch offline!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#e65100",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "id": "/",
+  "lang": "de-DE",
+  "dir": "ltr",
+  
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/maskable-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  
+  "screenshots": [
+    {
+      "src": "/screenshots/recipe-list-narrow.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Rezeptübersicht auf dem Smartphone"
+    },
+    {
+      "src": "/screenshots/recipe-detail-narrow.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Rezeptdetailansicht auf dem Smartphone"
+    },
+    {
+      "src": "/screenshots/meal-plan-narrow.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Wochenplanung auf dem Smartphone"
+    },
+    {
+      "src": "/screenshots/shopping-list-narrow.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Einkaufsliste auf dem Smartphone"
+    },
+    {
+      "src": "/screenshots/recipe-list-wide.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Rezeptübersicht auf dem Desktop"
+    },
+    {
+      "src": "/screenshots/meal-plan-wide.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Wochenplanung auf dem Desktop"
+    }
+  ],
+  
+  "categories": [
+    "food",
+    "lifestyle",
+    "productivity",
+    "utilities"
+  ],
+  
+  "shortcuts": [
+    {
+      "name": "Neues Rezept",
+      "short_name": "+ Rezept",
+      "description": "Schnell ein neues Rezept hinzufügen",
+      "url": "/recipe/new",
+      "icons": [
+        {
+          "src": "/icons/shortcut-add-recipe-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Wochenplan",
+      "short_name": "Plan",
+      "description": "Deinen Wochenplan anzeigen",
+      "url": "/meal-plan",
+      "icons": [
+        {
+          "src": "/icons/shortcut-meal-plan-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Einkaufsliste",
+      "short_name": "Einkauf",
+      "description": "Deine aktuelle Einkaufsliste",
+      "url": "/shopping-list",
+      "icons": [
+        {
+          "src": "/icons/shortcut-shopping-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Favoriten",
+      "short_name": "Favoriten",
+      "description": "Deine Lieblingsrezepte",
+      "url": "/favorites",
+      "icons": [
+        {
+          "src": "/icons/shortcut-favorites-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  
+  "related_applications": [],
+  "prefer_related_applications": false,
+  
+  "handle_links": "preferred",
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
+  
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  
+  "share_target": {
+    "action": "/share-target",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "name",
+      "text": "description",
+      "url": "link",
+      "files": [
+        {
+          "name": "recipe_image",
+          "accept": ["image/*"]
+        }
+      ]
+    }
+  },
+  
+  "protocol_handlers": [
+    {
+      "protocol": "web+kochplan",
+      "url": "/recipe/%s"
+    }
+  ]
+}

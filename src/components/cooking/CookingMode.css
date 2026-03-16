@@ -1,0 +1,424 @@
+/* ============================================
+   COOKING MODE - Kitchen-Friendly Design
+   ============================================ */
+
+/* Base Variables */
+:root {
+  --cooking-bg: #1A1A1A;
+  --cooking-bg-secondary: #2A2A2A;
+  --cooking-bg-tertiary: #333333;
+  --cooking-text: #FFFFFF;
+  --cooking-text-secondary: #B0B0B0;
+  --cooking-text-muted: #808080;
+  --cooking-accent: #4CAF50;
+  --cooking-accent-hover: #45a049;
+  --cooking-warning: #FFA500;
+  --cooking-danger: #FF4444;
+  --cooking-danger-hover: #ff3333;
+  --cooking-touch-min: 64px;
+  --cooking-border-radius: 12px;
+  --cooking-spacing: 16px;
+  --cooking-spacing-lg: 24px;
+  --cooking-font-lg: 1.5rem;
+  --cooking-font-xl: 2rem;
+  --cooking-font-xxl: 2.5rem;
+}
+
+/* ============================================
+   COOKING MODE CONTAINER
+   ============================================ */
+.cooking-mode {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--cooking-bg);
+  color: var(--cooking-text);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.cooking-mode--empty {
+  align-items: center;
+  justify-content: center;
+  padding: var(--cooking-spacing-lg);
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.cooking-mode__header {
+  background-color: var(--cooking-bg-secondary);
+  padding: var(--cooking-spacing);
+  border-bottom: 2px solid var(--cooking-bg-tertiary);
+  flex-shrink: 0;
+}
+
+.cooking-mode__header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--cooking-spacing);
+}
+
+.cooking-mode__recipe-title {
+  font-size: var(--cooking-font-lg);
+  font-weight: 600;
+  margin: 0;
+  color: var(--cooking-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 80px);
+}
+
+.cooking-mode__exit-btn {
+  width: var(--cooking-touch-min);
+  height: var(--cooking-touch-min);
+  min-width: var(--cooking-touch-min);
+  min-height: var(--cooking-touch-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cooking-danger);
+  color: white;
+  border: none;
+  border-radius: var(--cooking-border-radius);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cooking-mode__exit-btn:hover {
+  background-color: var(--cooking-danger-hover);
+}
+
+.cooking-mode__exit-btn:focus {
+  outline: 3px solid white;
+  outline-offset: 2px;
+}
+
+/* Progress Bar */
+.cooking-mode__progress {
+  position: relative;
+  height: 32px;
+  background-color: var(--cooking-bg-tertiary);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: var(--cooking-spacing);
+}
+
+.cooking-mode__progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--cooking-accent) 0%, #66BB6A 100%);
+  border-radius: 16px;
+  transition: width 0.3s ease;
+}
+
+.cooking-mode__progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cooking-text);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* Status Bar */
+.cooking-mode__status {
+  display: flex;
+  gap: var(--cooking-spacing);
+  flex-wrap: wrap;
+}
+
+.cooking-mode__status-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--cooking-text-muted);
+  padding: 6px 12px;
+  background-color: var(--cooking-bg);
+  border-radius: 20px;
+}
+
+.cooking-mode__status-item.active {
+  color: var(--cooking-accent);
+  background-color: rgba(76, 175, 80, 0.15);
+}
+
+.cooking-mode__status-item svg {
+  flex-shrink: 0;
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+.cooking-mode__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Timer Panel */
+.cooking-mode__timer-panel {
+  position: absolute;
+  top: var(--cooking-spacing);
+  right: var(--cooking-spacing);
+  width: 280px;
+  max-width: calc(100% - 32px);
+  max-height: 50%;
+  background-color: var(--cooking-bg-secondary);
+  border-radius: var(--cooking-border-radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cooking-mode__timer-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--cooking-spacing);
+  border-bottom: 1px solid var(--cooking-bg-tertiary);
+}
+
+.cooking-mode__timer-panel-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--cooking-text);
+}
+
+.cooking-mode__timer-panel-close {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--cooking-text-secondary);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.cooking-mode__timer-panel-close:hover {
+  background-color: var(--cooking-bg-tertiary);
+  color: var(--cooking-text);
+}
+
+.cooking-mode__timer-list {
+  overflow-y: auto;
+  padding: var(--cooking-spacing);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cooking-spacing);
+}
+
+/* ============================================
+   FOOTER NAVIGATION
+   ============================================ */
+.cooking-mode__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--cooking-spacing);
+  background-color: var(--cooking-bg-secondary);
+  border-top: 2px solid var(--cooking-bg-tertiary);
+  gap: var(--cooking-spacing);
+  flex-shrink: 0;
+}
+
+.cooking-mode__nav-btn {
+  width: var(--cooking-touch-min);
+  height: var(--cooking-touch-min);
+  min-width: var(--cooking-touch-min);
+  min-height: var(--cooking-touch-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cooking-bg-tertiary);
+  color: var(--cooking-text);
+  border: none;
+  border-radius: var(--cooking-border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cooking-mode__nav-btn:hover:not(:disabled) {
+  background-color: var(--cooking-accent);
+  transform: scale(1.05);
+}
+
+.cooking-mode__nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.cooking-mode__nav-btn:focus {
+  outline: 3px solid var(--cooking-accent);
+  outline-offset: 2px;
+}
+
+/* Step Dots */
+.cooking-mode__dots {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 200px;
+}
+
+.cooking-mode__dot {
+  width: 12px;
+  height: 12px;
+  min-width: 12px;
+  min-height: 12px;
+  border-radius: 50%;
+  background-color: var(--cooking-bg-tertiary);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.cooking-mode__dot:hover {
+  background-color: var(--cooking-text-secondary);
+  transform: scale(1.2);
+}
+
+.cooking-mode__dot.active {
+  background-color: var(--cooking-accent);
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.cooking-mode__dot.completed {
+  background-color: var(--cooking-accent);
+  opacity: 0.5;
+}
+
+.cooking-mode__dot:focus {
+  outline: 2px solid var(--cooking-accent);
+  outline-offset: 2px;
+}
+
+/* Checklist Toggle */
+.cooking-mode__checklist-toggle {
+  width: var(--cooking-touch-min);
+  height: var(--cooking-touch-min);
+  min-width: var(--cooking-touch-min);
+  min-height: var(--cooking-touch-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cooking-accent);
+  color: white;
+  border: none;
+  border-radius: var(--cooking-border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cooking-mode__checklist-toggle:hover {
+  background-color: var(--cooking-accent-hover);
+  transform: scale(1.05);
+}
+
+/* ============================================
+   SWIPE HINTS
+   ============================================ */
+.cooking-mode__swipe-hint {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: var(--cooking-text-muted);
+  opacity: 0.3;
+  pointer-events: none;
+  animation: pulse 2s infinite;
+}
+
+.cooking-mode__swipe-hint--left {
+  left: var(--cooking-spacing);
+}
+
+.cooking-mode__swipe-hint--right {
+  right: var(--cooking-spacing);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 480px) {
+  .cooking-mode__recipe-title {
+    font-size: 1.2rem;
+  }
+  
+  .cooking-mode__timer-panel {
+    left: var(--cooking-spacing);
+    right: var(--cooking-spacing);
+    width: auto;
+  }
+  
+  .cooking-mode__dots {
+    max-width: 120px;
+  }
+  
+  .cooking-mode__dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .cooking-mode__header {
+    padding: var(--cooking-spacing-lg);
+  }
+  
+  .cooking-mode__recipe-title {
+    font-size: 1.75rem;
+  }
+  
+  .cooking-mode__footer {
+    padding: var(--cooking-spacing-lg);
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .cooking-mode__progress-bar,
+  .cooking-mode__nav-btn,
+  .cooking-mode__dot,
+  .cooking-mode__swipe-hint {
+    transition: none;
+    animation: none;
+  }
+}
