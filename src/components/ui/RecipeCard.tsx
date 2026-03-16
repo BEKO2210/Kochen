@@ -30,6 +30,7 @@ export interface Recipe {
   id: string;
   title: string;
   image?: string;
+  imageUrl?: string;
   prepTime: number; // in Minuten
   servings: number;
   tags?: string[];
@@ -61,6 +62,7 @@ export function RecipeCard({
 }: RecipeCardProps) {
   const [isFavorite, setIsFavorite] = useState(recipe.isFavorite ?? false);
   const [imageError, setImageError] = useState(false);
+  const recipeImage = recipeImage || recipeImageUrl;
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -166,9 +168,9 @@ function DefaultCard({
     >
       {/* Bild */}
       <div className="aspect-video bg-amber-100 relative">
-        {recipe.image && !imageError ? (
+        {recipeImage && !imageError ? (
           <img
-            src={recipe.image}
+            src={recipeImage}
             alt={recipe.title}
             className="w-full h-full object-cover"
             onError={onImageError}
@@ -343,9 +345,9 @@ function FeaturedCard({
       `}
     >
       <div className="aspect-[16/10] bg-amber-100 relative">
-        {recipe.image ? (
+        {recipeImage ? (
           <img
-            src={recipe.image}
+            src={recipeImage}
             alt={recipe.title}
             className="w-full h-full object-cover"
             loading="lazy"
@@ -430,9 +432,9 @@ function HorizontalCard({
       `}
     >
       <div className="w-32 sm:w-40 bg-amber-100 flex-shrink-0">
-        {recipe.image ? (
+        {recipeImage ? (
           <img
-            src={recipe.image}
+            src={recipeImage}
             alt={recipe.title}
             className="w-full h-full object-cover"
             loading="lazy"
@@ -511,9 +513,9 @@ function KitchenModeCard({
       `}
     >
       <div className="aspect-video bg-neutral-700 relative">
-        {recipe.image ? (
+        {recipeImage ? (
           <img
-            src={recipe.image}
+            src={recipeImage}
             alt={recipe.title}
             className="w-full h-full object-cover"
             loading="lazy"

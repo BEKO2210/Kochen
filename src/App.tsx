@@ -9,6 +9,7 @@ import { PlannerPage } from './pages/PlannerPage';
 import { ShoppingPage } from './pages/ShoppingPage';
 import { CookingPage } from './pages/CookingPage';
 import { SettingsPage } from './pages/SettingsPage';
+import { RecipeFormPage } from './pages/RecipeFormPage';
 
 // Components
 import { BottomNav, NavTab } from './components/ui/BottomNav';
@@ -23,15 +24,15 @@ const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
 // Tab to route mapping
 const tabToRoute: Record<NavTab, string> = {
   recipes: '/recipes',
-  planner: '/meal-plan',
-  shopping: '/shopping-list',
+  planner: '/planner',
+  shopping: '/shopping',
   cooking: '/',
   more: '/settings',
 };
 
 const routeToTab = (pathname: string): NavTab => {
   if (pathname.startsWith('/recipes')) return 'recipes';
-  if (pathname.startsWith('/meal-plan')) return 'planner';
+  if (pathname.startsWith('/planner')) return 'planner';
   if (pathname.startsWith('/shopping')) return 'shopping';
   if (pathname.startsWith('/settings')) return 'more';
   return 'cooking';
@@ -82,9 +83,11 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/recipes" element={<RecipesPage />} />
+              <Route path="/recipes/new" element={<RecipeFormPage />} />
               <Route path="/recipes/:id" element={<RecipeDetailPage />} />
-              <Route path="/meal-plan" element={<PlannerPage />} />
-              <Route path="/shopping-list" element={<ShoppingPage />} />
+              <Route path="/recipes/:id/edit" element={<RecipeFormPage />} />
+              <Route path="/planner" element={<PlannerPage />} />
+              <Route path="/shopping" element={<ShoppingPage />} />
               <Route path="/cooking/:id" element={<CookingPage />} />
               <Route path="/settings" element={<SettingsPage />} />
             </Routes>

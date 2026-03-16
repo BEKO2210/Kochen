@@ -118,6 +118,9 @@ export const SettingsPage: React.FC = () => {
     setTimeout(() => setExportSuccess(false), 2000);
   };
 
+  const [importSuccess, setImportSuccess] = useState(false);
+  const [importError, setImportError] = useState('');
+
   // Handle data import
   const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -127,13 +130,48 @@ export const SettingsPage: React.FC = () => {
     reader.onload = (e) => {
       try {
         const data = JSON.parse(e.target?.result as string);
-        // Import logic would go here
-        alert('Daten erfolgreich importiert!');
+
+        // Validate structure
+        if (!data || typeof data !== 'object') {
+          throw new Error('Ungültiges Format');
+        }
+
+        // Import recipes
+        if (data.recipes && Array.isArray(data.recipes)) {
+          localStorage.setItem('kochplan_recipes', JSON.stringify(data.recipes));
+        }
+
+        // Import meal plans (they use per-week keys)
+        if (data.plannedMeals && typeof data.plannedMeals === 'object') {
+          // plannedMeals from export is the current week's meals array
+          // We store it under the current week's key
+          const now = new Date();
+          const day = now.getDay();
+          const diff = now.getDate() - day + (day === 0 ? -6 : 1);
+          const weekStart = new Date(now.setDate(diff));
+          const key = `kochplan_meal_planner_${weekStart.toISOString().split('T')[0]}`;
+          localStorage.setItem(key, JSON.stringify(data.plannedMeals));
+        }
+
+        // Import shopping lists
+        if (data.shoppingLists && Array.isArray(data.shoppingLists)) {
+          localStorage.setItem('kochplan_shopping_lists', JSON.stringify(data.shoppingLists));
+        }
+
+        setImportSuccess(true);
+        setTimeout(() => {
+          setImportSuccess(false);
+          window.location.reload();
+        }, 1500);
       } catch (error) {
-        alert('Fehler beim Importieren der Daten.');
+        setImportError('Fehler beim Importieren. Ist die Datei ein gültiges KochPlan-Backup?');
+        setTimeout(() => setImportError(''), 3000);
       }
     };
     reader.readAsText(file);
+
+    // Reset file input so the same file can be imported again
+    event.target.value = '';
   };
 
   // Handle clear all data
@@ -422,9 +460,21 @@ export const SettingsPage: React.FC = () => {
 
       {/* Export Success Toast */}
       {exportSuccess && (
-        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2">
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 z-50">
           <Check className="w-4 h-4" />
           Export erfolgreich!
+        </div>
+      )}
+      {importSuccess && (
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 z-50">
+          <Check className="w-4 h-4" />
+          Import erfolgreich! Seite wird neu geladen...
+        </div>
+      )}
+      {importError && (
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 z-50">
+          <AlertCircle className="w-4 h-4" />
+          {importError}
         </div>
       )}
     </div>
