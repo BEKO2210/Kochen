@@ -209,8 +209,10 @@ export const CookingPage: React.FC = () => {
     );
   }, []);
 
-  // Timer countdown effect
+  // Timer countdown effect - only run when there are active timers
   useEffect(() => {
+    if (timers.length === 0) return;
+
     const interval = setInterval(() => {
       setTimers(prev =>
         prev.map(timer => {
@@ -223,7 +225,7 @@ export const CookingPage: React.FC = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [timers.length > 0]);
 
   // Read current step aloud
   const readCurrentStep = useCallback(() => {
@@ -239,7 +241,7 @@ export const CookingPage: React.FC = () => {
     if (speechEnabled && currentStep) {
       readCurrentStep();
     }
-  }, [currentStepIndex, speechEnabled]);
+  }, [currentStepIndex, speechEnabled, readCurrentStep]);
 
   const handleExit = () => {
     if (window.confirm('Möchtest du den Koch-Modus wirklich beenden?')) {

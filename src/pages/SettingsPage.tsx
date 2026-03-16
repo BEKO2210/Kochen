@@ -136,26 +136,28 @@ export const SettingsPage: React.FC = () => {
           throw new Error('Ungültiges Format');
         }
 
-        // Import recipes
+        // Restore data to localStorage (same keys used by hooks)
+        const KEYS = {
+          recipes: 'kochplan_recipes',
+          mealPlanner: 'kochplan_meal_planner',
+          shoppingLists: 'kochplan_shopping_lists',
+        };
+
         if (data.recipes && Array.isArray(data.recipes)) {
-          localStorage.setItem('kochplan_recipes', JSON.stringify(data.recipes));
+          localStorage.setItem(KEYS.recipes, JSON.stringify(data.recipes));
         }
 
-        // Import meal plans (they use per-week keys)
         if (data.plannedMeals && typeof data.plannedMeals === 'object') {
-          // plannedMeals from export is the current week's meals array
-          // We store it under the current week's key
           const now = new Date();
           const day = now.getDay();
           const diff = now.getDate() - day + (day === 0 ? -6 : 1);
           const weekStart = new Date(now.setDate(diff));
-          const key = `kochplan_meal_planner_${weekStart.toISOString().split('T')[0]}`;
+          const key = `${KEYS.mealPlanner}_${weekStart.toISOString().split('T')[0]}`;
           localStorage.setItem(key, JSON.stringify(data.plannedMeals));
         }
 
-        // Import shopping lists
         if (data.shoppingLists && Array.isArray(data.shoppingLists)) {
-          localStorage.setItem('kochplan_shopping_lists', JSON.stringify(data.shoppingLists));
+          localStorage.setItem(KEYS.shoppingLists, JSON.stringify(data.shoppingLists));
         }
 
         setImportSuccess(true);

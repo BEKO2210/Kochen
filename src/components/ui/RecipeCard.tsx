@@ -60,14 +60,12 @@ export function RecipeCard({
   onFavoriteToggle,
   className = '',
 }: RecipeCardProps) {
-  const [isFavorite, setIsFavorite] = useState(recipe.isFavorite ?? false);
   const [imageError, setImageError] = useState(false);
+  const isFavorite = recipe.isFavorite ?? false;
   const recipeImage = recipe.image || recipe.imageUrl;
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const newFavoriteState = !isFavorite;
-    setIsFavorite(newFavoriteState);
     onFavoriteToggle?.(recipe.id);
   };
 

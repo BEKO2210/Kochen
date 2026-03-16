@@ -53,9 +53,10 @@ export interface UseMealPlannerReturn {
   // Statistics
   getWeeklyStats: () => WeeklyStats;
 
-  // Clear
+  // Clear & Copy
   clearWeek: () => void;
   clearDay: (day: DayOfWeek) => void;
+  copyWeekTo: (targetWeekStart: Date) => void;
 }
 
 export interface WeeklyStats {
@@ -441,6 +442,20 @@ export function useMealPlanner(): UseMealPlannerReturn {
   }, [plannedMeals]);
 
   /**
+   * Kopiert den aktuellen Wochenplan in eine andere Woche
+   */
+  const copyWeekTo = useCallback((targetWeekStart: Date): void => {
+    if (plannedMeals.length === 0) return;
+
+    const copiedMeals = plannedMeals.map(meal => ({
+      ...meal,
+      id: generateId(),
+    }));
+
+    saveWeekPlan(targetWeekStart, copiedMeals);
+  }, [plannedMeals]);
+
+  /**
    * Löscht den gesamten Wochenplan
    */
   const clearWeek = useCallback((): void => {
@@ -473,6 +488,7 @@ export function useMealPlanner(): UseMealPlannerReturn {
     getWeeklyStats,
     clearWeek,
     clearDay,
+    copyWeekTo,
   };
 }
 
