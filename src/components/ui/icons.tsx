@@ -118,6 +118,9 @@ import {
   
   // Numbers
   Hash,
+
+  // Loading
+  Loader2,
 } from 'lucide-react';
 
 // Re-export all icons
@@ -232,6 +235,9 @@ export {
   
   // Numbers
   Hash,
+
+  // Loading
+  Loader2,
 };
 
 // ============================================
