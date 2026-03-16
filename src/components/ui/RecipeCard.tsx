@@ -49,6 +49,14 @@ export interface RecipeCardProps {
 }
 
 // ============================================
+// Helpers
+// ============================================
+
+function getRecipeImage(recipe: Recipe): string | undefined {
+  return recipe.image || recipe.imageUrl;
+}
+
+// ============================================
 // Component
 // ============================================
 
@@ -62,7 +70,6 @@ export function RecipeCard({
 }: RecipeCardProps) {
   const [imageError, setImageError] = useState(false);
   const isFavorite = recipe.isFavorite ?? false;
-  const recipeImage = recipe.image || recipe.imageUrl;
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -166,9 +173,9 @@ function DefaultCard({
     >
       {/* Bild */}
       <div className="aspect-video bg-amber-100 relative">
-        {recipeImage && !imageError ? (
+        {getRecipeImage(recipe) && !imageError ? (
           <img
-            src={recipeImage}
+            src={getRecipeImage(recipe)}
             alt={recipe.title}
             className="w-full h-full object-cover"
             onError={onImageError}
@@ -343,9 +350,9 @@ function FeaturedCard({
       `}
     >
       <div className="aspect-[16/10] bg-amber-100 relative">
-        {recipeImage ? (
+        {getRecipeImage(recipe) ? (
           <img
-            src={recipeImage}
+            src={getRecipeImage(recipe)}
             alt={recipe.title}
             className="w-full h-full object-cover"
             loading="lazy"
@@ -430,9 +437,9 @@ function HorizontalCard({
       `}
     >
       <div className="w-32 sm:w-40 bg-amber-100 flex-shrink-0">
-        {recipeImage ? (
+        {getRecipeImage(recipe) ? (
           <img
-            src={recipeImage}
+            src={getRecipeImage(recipe)}
             alt={recipe.title}
             className="w-full h-full object-cover"
             loading="lazy"
@@ -511,9 +518,9 @@ function KitchenModeCard({
       `}
     >
       <div className="aspect-video bg-neutral-700 relative">
-        {recipeImage ? (
+        {getRecipeImage(recipe) ? (
           <img
-            src={recipeImage}
+            src={getRecipeImage(recipe)}
             alt={recipe.title}
             className="w-full h-full object-cover"
             loading="lazy"
