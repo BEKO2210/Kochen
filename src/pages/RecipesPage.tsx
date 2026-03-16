@@ -175,22 +175,22 @@ export const RecipesPage: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-amber-50 flex items-center justify-center">
+      <div className="min-h-screen bg-amber-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin" />
-          <p className="text-amber-700">Lade Rezepte...</p>
+          <p className="text-amber-700 dark:text-gray-300">Lade Rezepte...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-amber-50 pb-24">
+    <div className="min-h-screen bg-amber-50 dark:bg-gray-900 pb-24">
       {/* Header */}
-      <header className="bg-white border-b border-amber-100 sticky top-0 z-10">
+      <header className="bg-white dark:bg-gray-800 border-b border-amber-100 dark:border-gray-700 sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
-            <h1 className="text-2xl font-bold text-amber-950 flex items-center gap-2">
+            <h1 className="text-2xl font-bold text-amber-950 dark:text-white flex items-center gap-2">
               <ChefHat className="w-7 h-7 text-orange-500" />
               Rezepte
             </h1>
@@ -256,7 +256,7 @@ export const RecipesPage: React.FC = () => {
                 className={`p-2.5 transition-colors ${
                   viewMode === 'grid'
                     ? 'bg-orange-500 text-white'
-                    : 'hover:bg-amber-50'
+                    : 'hover:bg-amber-50 dark:bg-gray-900'
                 }`}
               >
                 <Grid3X3 className="w-5 h-5" />
@@ -266,7 +266,7 @@ export const RecipesPage: React.FC = () => {
                 className={`p-2.5 transition-colors ${
                   viewMode === 'list'
                     ? 'bg-orange-500 text-white'
-                    : 'hover:bg-amber-50'
+                    : 'hover:bg-amber-50 dark:bg-gray-900'
                 }`}
               >
                 <List className="w-5 h-5" />
@@ -278,7 +278,7 @@ export const RecipesPage: React.FC = () => {
 
       {/* Filters Panel */}
       {showFilters && (
-        <div className="bg-white border-b border-amber-100">
+        <div className="bg-white dark:bg-gray-800 border-b border-amber-100 dark:border-gray-700">
           <div className="max-w-6xl mx-auto px-4 py-4">
             {/* Favorites Toggle */}
             <div className="flex items-center gap-2 mb-4">
@@ -298,7 +298,7 @@ export const RecipesPage: React.FC = () => {
             {/* Categories */}
             {allCategories.length > 0 && (
               <div className="mb-4">
-                <h3 className="text-sm font-medium text-amber-700 mb-2">Kategorien</h3>
+                <h3 className="text-sm font-medium text-amber-700 dark:text-gray-300 mb-2">Kategorien</h3>
                 <div className="flex flex-wrap gap-2">
                   {allCategories.map((category) => (
                     <button
@@ -307,7 +307,7 @@ export const RecipesPage: React.FC = () => {
                       className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
                         selectedCategories.includes(category)
                           ? 'bg-orange-500 text-white'
-                          : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                          : 'bg-amber-100 dark:bg-gray-700 text-amber-700 dark:text-gray-300 hover:bg-amber-200 dark:hover:bg-gray-600'
                       }`}
                     >
                       {category}
@@ -319,7 +319,7 @@ export const RecipesPage: React.FC = () => {
 
             {/* Difficulty */}
             <div className="mb-4">
-              <h3 className="text-sm font-medium text-amber-700 mb-2">Schwierigkeit</h3>
+              <h3 className="text-sm font-medium text-amber-700 dark:text-gray-300 mb-2">Schwierigkeit</h3>
               <div className="flex flex-wrap gap-2">
                 {['easy', 'medium', 'hard'].map((diff) => (
                   <button
@@ -328,7 +328,7 @@ export const RecipesPage: React.FC = () => {
                     className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
                       selectedDifficulty === diff
                         ? 'bg-orange-500 text-white'
-                        : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                        : 'bg-amber-100 dark:bg-gray-700 text-amber-700 dark:text-gray-300 hover:bg-amber-200 dark:hover:bg-gray-600'
                     }`}
                   >
                     {diff === 'easy' ? 'Einfach' : diff === 'medium' ? 'Mittel' : 'Schwer'}
@@ -340,7 +340,7 @@ export const RecipesPage: React.FC = () => {
             {/* Tags */}
             {allTags.length > 0 && (
               <div className="mb-4">
-                <h3 className="text-sm font-medium text-amber-700 mb-2">Tags</h3>
+                <h3 className="text-sm font-medium text-amber-700 dark:text-gray-300 mb-2">Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {allTags.slice(0, 10).map((tag) => (
                     <button
@@ -349,7 +349,7 @@ export const RecipesPage: React.FC = () => {
                       className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
                         selectedTags.includes(tag)
                           ? 'bg-orange-500 text-white'
-                          : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                          : 'bg-amber-100 dark:bg-gray-700 text-amber-700 dark:text-gray-300 hover:bg-amber-200 dark:hover:bg-gray-600'
                       }`}
                     >
                       #{tag}
@@ -361,7 +361,7 @@ export const RecipesPage: React.FC = () => {
 
             {/* Max Time */}
             <div className="mb-4">
-              <h3 className="text-sm font-medium text-amber-700 mb-2">Max. Zeit</h3>
+              <h3 className="text-sm font-medium text-amber-700 dark:text-gray-300 mb-2">Max. Zeit</h3>
               <div className="flex flex-wrap gap-2">
                 {[15, 30, 45, 60].map((time) => (
                   <button
@@ -370,7 +370,7 @@ export const RecipesPage: React.FC = () => {
                     className={`px-3 py-1.5 rounded-full text-sm transition-colors flex items-center gap-1 ${
                       maxTime === time
                         ? 'bg-orange-500 text-white'
-                        : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                        : 'bg-amber-100 dark:bg-gray-700 text-amber-700 dark:text-gray-300 hover:bg-amber-200 dark:hover:bg-gray-600'
                     }`}
                   >
                     <Clock className="w-3 h-3" />
@@ -383,7 +383,7 @@ export const RecipesPage: React.FC = () => {
             {/* Sort */}
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <span className="text-sm text-amber-700">Sortieren nach:</span>
+                <span className="text-sm text-amber-700 dark:text-gray-300">Sortieren nach:</span>
                 <select
                   value={sortField}
                   onChange={(e) => setSortField(e.target.value as SortField)}
@@ -396,7 +396,7 @@ export const RecipesPage: React.FC = () => {
                 </select>
                 <button
                   onClick={() => setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')}
-                  className="p-1.5 rounded-lg border border-amber-200 hover:bg-amber-50"
+                  className="p-1.5 rounded-lg border border-amber-200 hover:bg-amber-50 dark:bg-gray-900"
                 >
                   {sortDirection === 'asc' ? '↑' : '↓'}
                 </button>
@@ -418,7 +418,7 @@ export const RecipesPage: React.FC = () => {
 
       {/* Results Count */}
       <div className="max-w-6xl mx-auto px-4 py-3">
-        <p className="text-sm text-amber-600">
+        <p className="text-sm text-amber-600 dark:text-gray-400">
           {sortedRecipes.length} {sortedRecipes.length === 1 ? 'Rezept' : 'Rezepte'} gefunden
           {recipes.length !== sortedRecipes.length && ` (von ${recipes.length} insgesamt)`}
         </p>
@@ -455,10 +455,10 @@ export const RecipesPage: React.FC = () => {
         ) : (
           <div className="text-center py-16">
             <ChefHat className="w-16 h-16 text-amber-300 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-amber-950 mb-2">
+            <h3 className="text-lg font-semibold text-amber-950 dark:text-white mb-2">
               Keine Rezepte gefunden
             </h3>
-            <p className="text-amber-600 mb-6">
+            <p className="text-amber-600 dark:text-gray-400 mb-6">
               {searchQuery || activeFiltersCount > 0
                 ? 'Versuche andere Suchbegriffe oder Filter'
                 : 'Füge dein erstes Rezept hinzu'}
@@ -486,11 +486,11 @@ export const RecipesPage: React.FC = () => {
       {/* Import Dialog */}
       {showImportDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6">
-            <h2 className="text-xl font-bold text-amber-950 mb-4">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-md w-full p-6">
+            <h2 className="text-xl font-bold text-amber-950 dark:text-white mb-4">
               Rezept importieren
             </h2>
-            <p className="text-amber-600 mb-4">
+            <p className="text-amber-600 dark:text-gray-400 mb-4">
               Füge die URL eines Rezepts von unterstützten Websites ein.
             </p>
             <Input

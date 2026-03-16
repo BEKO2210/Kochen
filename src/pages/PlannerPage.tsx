@@ -31,15 +31,15 @@ const MealSlot: React.FC<MealSlotProps> = ({ day, mealType, recipe, servings, on
   const { recipes } = useRecipes();
 
   return (
-    <div className="min-h-[80px] p-2 bg-amber-50 rounded-lg border border-amber-100">
+    <div className="min-h-[80px] p-2 bg-amber-50 dark:bg-gray-900 rounded-lg border border-amber-100 dark:border-gray-700">
       {recipe ? (
         <div className="relative group">
           <div 
             onClick={() => setShowSelector(true)}
             className="cursor-pointer"
           >
-            <p className="font-medium text-amber-950 text-sm line-clamp-2">{recipe.title}</p>
-            <p className="text-xs text-amber-600 mt-1">{servings} Portionen</p>
+            <p className="font-medium text-amber-950 dark:text-white text-sm line-clamp-2">{recipe.title}</p>
+            <p className="text-xs text-amber-600 dark:text-gray-400 mt-1">{servings} Portionen</p>
           </div>
           <button
             onClick={() => onSelect(null)}
@@ -60,14 +60,14 @@ const MealSlot: React.FC<MealSlotProps> = ({ day, mealType, recipe, servings, on
       {/* Recipe Selector Modal */}
       {showSelector && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full max-h-[80vh] overflow-hidden">
-            <div className="p-4 border-b border-amber-100 flex items-center justify-between">
-              <h3 className="font-semibold text-amber-950">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-lg w-full max-h-[80vh] overflow-hidden">
+            <div className="p-4 border-b border-amber-100 dark:border-gray-700 flex items-center justify-between">
+              <h3 className="font-semibold text-amber-950 dark:text-white">
                 {getDayName(day)} - {getMealTypeName(mealType)}
               </h3>
               <button
                 onClick={() => setShowSelector(false)}
-                className="p-2 hover:bg-amber-100 rounded-lg transition-colors"
+                className="p-2 hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700 rounded-lg transition-colors"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
@@ -81,10 +81,10 @@ const MealSlot: React.FC<MealSlotProps> = ({ day, mealType, recipe, servings, on
                       onSelect(recipe, recipe.servings);
                       setShowSelector(false);
                     }}
-                    className="w-full p-3 text-left bg-amber-50 hover:bg-amber-100 rounded-lg transition-colors"
+                    className="w-full p-3 text-left bg-amber-50 dark:bg-gray-900 hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700 rounded-lg transition-colors"
                   >
-                    <p className="font-medium text-amber-950">{recipe.title}</p>
-                    <p className="text-sm text-amber-600">
+                    <p className="font-medium text-amber-950 dark:text-white">{recipe.title}</p>
+                    <p className="text-sm text-amber-600 dark:text-gray-400">
                       {recipe.prepTime + recipe.cookTime} min • {recipe.servings} Portionen
                     </p>
                   </button>
@@ -119,7 +119,7 @@ export const PlannerPage: React.FC = () => {
   } = useMealPlanner();
   
   const { recipes } = useRecipes();
-  const { createList, addFromIngredients } = useShoppingList();
+  const { createListWithIngredients } = useShoppingList();
   
   const [showTemplates, setShowTemplates] = useState(false);
   const [showCopyDialog, setShowCopyDialog] = useState(false);
@@ -170,8 +170,7 @@ export const PlannerPage: React.FC = () => {
     const ingredients = generateShoppingList();
     if (ingredients.length > 0) {
       const listName = `Einkaufsliste KW ${getWeekNumber(currentWeek)}`;
-      createList(listName);
-      addFromIngredients(ingredients);
+      createListWithIngredients(listName, ingredients);
       navigate('/shopping');
     }
   };
@@ -254,27 +253,27 @@ export const PlannerPage: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-amber-50 flex items-center justify-center">
+      <div className="min-h-screen bg-amber-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin" />
-          <p className="text-amber-700">Lade Wochenplan...</p>
+          <p className="text-amber-700 dark:text-gray-300">Lade Wochenplan...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-amber-50 pb-24">
+    <div className="min-h-screen bg-amber-50 dark:bg-gray-900 pb-24">
       {/* Header */}
-      <header className="bg-white border-b border-amber-100 sticky top-0 z-10">
+      <header className="bg-white dark:bg-gray-800 border-b border-amber-100 dark:border-gray-700 sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-bold text-amber-950 flex items-center gap-2">
+              <h1 className="text-2xl font-bold text-amber-950 dark:text-white flex items-center gap-2">
                 <Calendar className="w-7 h-7 text-orange-500" />
                 Wochenplaner
               </h1>
-              <p className="text-amber-600 text-sm mt-1">
+              <p className="text-amber-600 dark:text-gray-400 text-sm mt-1">
                 KW {getWeekNumber(currentWeek)} • {formatDateRange()}
               </p>
             </div>
@@ -282,21 +281,21 @@ export const PlannerPage: React.FC = () => {
             <div className="flex items-center gap-2 flex-wrap">
               <button
                 onClick={goToCurrentWeek}
-                className="px-3 py-2 bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-colors flex items-center gap-1"
+                className="px-3 py-2 bg-amber-100 dark:bg-gray-700 text-amber-700 dark:text-gray-300 rounded-lg hover:bg-amber-200 dark:hover:bg-gray-600 transition-colors flex items-center gap-1"
               >
                 <RotateCcw className="w-4 h-4" />
                 <span className="hidden sm:inline">Heute</span>
               </button>
               <button
                 onClick={() => setShowTemplates(true)}
-                className="px-3 py-2 bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-colors flex items-center gap-1"
+                className="px-3 py-2 bg-amber-100 dark:bg-gray-700 text-amber-700 dark:text-gray-300 rounded-lg hover:bg-amber-200 dark:hover:bg-gray-600 transition-colors flex items-center gap-1"
               >
                 <LayoutTemplate className="w-4 h-4" />
                 <span className="hidden sm:inline">Vorlagen</span>
               </button>
               <button
                 onClick={() => setShowCopyDialog(true)}
-                className="px-3 py-2 bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-colors flex items-center gap-1"
+                className="px-3 py-2 bg-amber-100 dark:bg-gray-700 text-amber-700 dark:text-gray-300 rounded-lg hover:bg-amber-200 dark:hover:bg-gray-600 transition-colors flex items-center gap-1"
               >
                 <Copy className="w-4 h-4" />
                 <span className="hidden sm:inline">Kopieren</span>
@@ -316,18 +315,18 @@ export const PlannerPage: React.FC = () => {
           <div className="flex items-center justify-center gap-4 mt-4">
             <button
               onClick={previousWeek}
-              className="p-2 hover:bg-amber-100 rounded-lg transition-colors"
+              className="p-2 hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700 rounded-lg transition-colors"
             >
-              <ChevronLeft className="w-6 h-6 text-amber-700" />
+              <ChevronLeft className="w-6 h-6 text-amber-700 dark:text-gray-300" />
             </button>
-            <span className="font-medium text-amber-950 min-w-[200px] text-center">
+            <span className="font-medium text-amber-950 dark:text-white min-w-[200px] text-center">
               {formatDateRange()}
             </span>
             <button
               onClick={nextWeek}
-              className="p-2 hover:bg-amber-100 rounded-lg transition-colors"
+              className="p-2 hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700 rounded-lg transition-colors"
             >
-              <ChevronRight className="w-6 h-6 text-amber-700" />
+              <ChevronRight className="w-6 h-6 text-amber-700 dark:text-gray-300" />
             </button>
           </div>
         </div>
@@ -336,28 +335,28 @@ export const PlannerPage: React.FC = () => {
       {/* Stats */}
       <div className="max-w-6xl mx-auto px-4 py-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div className="bg-white rounded-xl p-3 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm">
             <p className="text-2xl font-bold text-orange-500">{stats.totalMeals}</p>
-            <p className="text-sm text-amber-600">Mahlzeiten</p>
+            <p className="text-sm text-amber-600 dark:text-gray-400">Mahlzeiten</p>
           </div>
-          <div className="bg-white rounded-xl p-3 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm">
             <p className="text-2xl font-bold text-orange-500">{stats.totalServings}</p>
-            <p className="text-sm text-amber-600">Portionen</p>
+            <p className="text-sm text-amber-600 dark:text-gray-400">Portionen</p>
           </div>
-          <div className="bg-white rounded-xl p-3 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm">
             <p className="text-2xl font-bold text-orange-500">{stats.estimatedPrepTime + stats.estimatedCookTime}</p>
-            <p className="text-sm text-amber-600">Min. Gesamtzeit</p>
+            <p className="text-sm text-amber-600 dark:text-gray-400">Min. Gesamtzeit</p>
           </div>
-          <div className="bg-white rounded-xl p-3 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm">
             <p className="text-2xl font-bold text-orange-500">{stats.uniqueRecipes}</p>
-            <p className="text-sm text-amber-600">Verschiedene Rezepte</p>
+            <p className="text-sm text-amber-600 dark:text-gray-400">Verschiedene Rezepte</p>
           </div>
         </div>
       </div>
 
       {/* Week Grid */}
       <main className="max-w-6xl mx-auto px-4 pb-8 overflow-x-auto">
-        <div className="min-w-[800px]">
+        <div className="min-w-0 md:min-w-[800px]">
           {/* Day Headers */}
           <div className="grid grid-cols-8 gap-2 mb-2">
             <div className="p-2"></div>
@@ -368,11 +367,11 @@ export const PlannerPage: React.FC = () => {
                 <div
                   key={day}
                   className={`p-2 text-center rounded-lg ${
-                    isToday ? 'bg-orange-500 text-white' : 'bg-white'
+                    isToday ? 'bg-orange-500 text-white' : 'bg-white dark:bg-gray-800'
                   }`}
                 >
                   <p className="font-semibold">{getDayName(day).slice(0, 2)}</p>
-                  <p className={`text-sm ${isToday ? 'text-orange-100' : 'text-amber-600'}`}>
+                  <p className={`text-sm ${isToday ? 'text-orange-100' : 'text-amber-600 dark:text-gray-400'}`}>
                     {date.getDate()}.
                   </p>
                 </div>
@@ -384,7 +383,7 @@ export const PlannerPage: React.FC = () => {
           {mealTypes.map((mealType) => (
             <div key={mealType} className="grid grid-cols-8 gap-2 mb-2">
               <div className="p-2 flex items-center">
-                <span className="text-sm font-medium text-amber-700">
+                <span className="text-sm font-medium text-amber-700 dark:text-gray-300">
                   {getMealTypeName(mealType)}
                 </span>
               </div>
@@ -422,17 +421,17 @@ export const PlannerPage: React.FC = () => {
       {/* Templates Modal */}
       {showTemplates && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6">
-            <h2 className="text-xl font-bold text-amber-950 mb-4">Wochenvorlagen</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-md w-full p-6">
+            <h2 className="text-xl font-bold text-amber-950 dark:text-white mb-4">Wochenvorlagen</h2>
             <div className="space-y-3">
               {templates.map((template) => (
                 <button
                   key={template.id}
                   onClick={() => applyTemplate(template.id)}
-                  className="w-full p-4 bg-amber-50 hover:bg-amber-100 rounded-xl text-left transition-colors"
+                  className="w-full p-4 bg-amber-50 dark:bg-gray-900 hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700 rounded-xl text-left transition-colors"
                 >
-                  <p className="font-medium text-amber-950">{template.name}</p>
-                  <p className="text-sm text-amber-600">{template.description}</p>
+                  <p className="font-medium text-amber-950 dark:text-white">{template.name}</p>
+                  <p className="text-sm text-amber-600 dark:text-gray-400">{template.description}</p>
                 </button>
               ))}
             </div>
@@ -450,9 +449,9 @@ export const PlannerPage: React.FC = () => {
       {/* Copy Week Dialog */}
       {showCopyDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6">
-            <h2 className="text-xl font-bold text-amber-950 mb-4">Woche kopieren</h2>
-            <p className="text-amber-600 mb-4">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-md w-full p-6">
+            <h2 className="text-xl font-bold text-amber-950 dark:text-white mb-4">Woche kopieren</h2>
+            <p className="text-amber-600 dark:text-gray-400 mb-4">
               Wähle die Zielwoche, in die der aktuelle Plan kopiert werden soll:
             </p>
             <div className="space-y-2 mb-4">
@@ -467,11 +466,11 @@ export const PlannerPage: React.FC = () => {
                     className={`w-full p-3 rounded-lg text-left transition-colors ${
                       isSelected
                         ? 'bg-orange-500 text-white'
-                        : 'bg-amber-50 hover:bg-amber-100'
+                        : 'bg-amber-50 dark:bg-gray-900 hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700'
                     }`}
                   >
                     <p className="font-medium">KW {getWeekNumber(targetDate)}</p>
-                    <p className={`text-sm ${isSelected ? 'text-orange-100' : 'text-amber-600'}`}>
+                    <p className={`text-sm ${isSelected ? 'text-orange-100' : 'text-amber-600 dark:text-gray-400'}`}>
                       {targetDate.toLocaleDateString('de-DE', { day: 'numeric', month: 'short' })} -
                       {new Date(targetDate.getTime() + 6 * 24 * 60 * 60 * 1000).toLocaleDateString('de-DE', { day: 'numeric', month: 'short' })}
                     </p>
@@ -520,10 +519,10 @@ export const PlannerPage: React.FC = () => {
       {/* Clear Confirm Dialog */}
       {showClearConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-sm w-full p-6 text-center">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-sm w-full p-6 text-center">
             <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-            <h2 className="text-xl font-bold text-amber-950 mb-2">Woche leeren?</h2>
-            <p className="text-amber-600 mb-6">
+            <h2 className="text-xl font-bold text-amber-950 dark:text-white mb-2">Woche leeren?</h2>
+            <p className="text-amber-600 dark:text-gray-400 mb-6">
               Möchtest du wirklich alle geplanten Mahlzeiten für diese Woche entfernen?
             </p>
             <div className="flex gap-3">

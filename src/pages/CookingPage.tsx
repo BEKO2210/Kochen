@@ -380,10 +380,10 @@ export const CookingPage: React.FC = () => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex overflow-hidden">
-        {/* Ingredients Panel */}
+      <main className="flex-1 flex overflow-hidden relative">
+        {/* Ingredients Panel - overlay on mobile, sidebar on desktop */}
         {showIngredients && (
-          <div className="w-64 bg-gray-800 border-r border-gray-700 p-4 overflow-y-auto">
+          <div className="fixed inset-0 z-30 bg-gray-800 p-4 overflow-y-auto md:static md:inset-auto md:w-64 md:border-r md:border-gray-700">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-semibold flex items-center gap-2">
                 <List className="w-4 h-4" />

@@ -31,10 +31,10 @@ interface SettingSectionProps {
 }
 
 const SettingSection: React.FC<SettingSectionProps> = ({ title, icon: Icon, children }) => (
-  <div className="bg-white rounded-xl shadow-sm overflow-hidden mb-4">
-    <div className="px-4 py-3 bg-amber-50 border-b border-amber-100 flex items-center gap-2">
+  <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden mb-4">
+    <div className="px-4 py-3 bg-amber-50 dark:bg-gray-900 border-b border-amber-100 dark:border-gray-700 flex items-center gap-2">
       <Icon className="w-5 h-5 text-orange-500" />
-      <h2 className="font-semibold text-amber-950">{title}</h2>
+      <h2 className="font-semibold text-amber-950 dark:text-white">{title}</h2>
     </div>
     <div className="p-4">{children}</div>
   </div>
@@ -47,10 +47,10 @@ interface SettingItemProps {
 }
 
 const SettingItem: React.FC<SettingItemProps> = ({ label, description, children }) => (
-  <div className="flex items-center justify-between py-3 border-b border-amber-100 last:border-0">
+  <div className="flex items-center justify-between py-3 border-b border-amber-100 dark:border-gray-700 last:border-0">
     <div>
-      <p className="font-medium text-amber-950">{label}</p>
-      {description && <p className="text-sm text-amber-600">{description}</p>}
+      <p className="font-medium text-amber-950 dark:text-white">{label}</p>
+      {description && <p className="text-sm text-amber-600 dark:text-gray-400">{description}</p>}
     </div>
     <div>{children}</div>
   </div>
@@ -189,11 +189,11 @@ export const SettingsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-amber-50 pb-24">
+    <div className="min-h-screen bg-amber-50 dark:bg-gray-900 pb-24">
       {/* Header */}
-      <header className="bg-white border-b border-amber-100 sticky top-0 z-10">
+      <header className="bg-white dark:bg-gray-800 border-b border-amber-100 dark:border-gray-700 sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 py-4">
-          <h1 className="text-2xl font-bold text-amber-950 flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-amber-950 dark:text-white flex items-center gap-2">
             <Settings className="w-7 h-7 text-orange-500" />
             Einstellungen
           </h1>
@@ -212,7 +212,7 @@ export const SettingsPage: React.FC = () => {
                   className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
                     theme === option.value
                       ? 'bg-orange-500 text-white'
-                      : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                      : 'bg-amber-100 dark:bg-gray-700 text-amber-700 dark:text-gray-300 hover:bg-amber-200 dark:hover:bg-gray-600'
                   }`}
                 >
                   <option.icon className="w-4 h-4" />
@@ -234,7 +234,7 @@ export const SettingsPage: React.FC = () => {
                   className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
                     language === option.value
                       ? 'bg-orange-500 text-white'
-                      : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                      : 'bg-amber-100 dark:bg-gray-700 text-amber-700 dark:text-gray-300 hover:bg-amber-200 dark:hover:bg-gray-600'
                   }`}
                 >
                   <span>{option.flag}</span>
@@ -254,14 +254,14 @@ export const SettingsPage: React.FC = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setDefaultServings(Math.max(1, defaultServings - 1))}
-                className="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center hover:bg-amber-200 transition-colors"
+                className="w-8 h-8 bg-amber-100 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-amber-200 dark:hover:bg-gray-600 transition-colors"
               >
                 -
               </button>
               <span className="w-8 text-center font-medium">{defaultServings}</span>
               <button
                 onClick={() => setDefaultServings(Math.min(20, defaultServings + 1))}
-                className="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center hover:bg-amber-200 transition-colors"
+                className="w-8 h-8 bg-amber-100 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-amber-200 dark:hover:bg-gray-600 transition-colors"
               >
                 +
               </button>
@@ -282,7 +282,7 @@ export const SettingsPage: React.FC = () => {
               }`}
             >
               <span
-                className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                className={`absolute top-1 w-4 h-4 bg-white dark:bg-gray-800 rounded-full transition-transform ${
                   notifications ? 'left-7' : 'left-1'
                 }`}
               />
@@ -300,7 +300,7 @@ export const SettingsPage: React.FC = () => {
               }`}
             >
               <span
-                className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                className={`absolute top-1 w-4 h-4 bg-white dark:bg-gray-800 rounded-full transition-transform ${
                   timerSound ? 'left-7' : 'left-1'
                 }`}
               />
@@ -318,7 +318,7 @@ export const SettingsPage: React.FC = () => {
               }`}
             >
               <span
-                className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                className={`absolute top-1 w-4 h-4 bg-white dark:bg-gray-800 rounded-full transition-transform ${
                   hapticFeedback ? 'left-7' : 'left-1'
                 }`}
               />
@@ -331,24 +331,24 @@ export const SettingsPage: React.FC = () => {
           <div className="space-y-3">
             <button
               onClick={handleExport}
-              className="w-full flex items-center justify-between p-3 bg-amber-50 rounded-lg hover:bg-amber-100 transition-colors"
+              className="w-full flex items-center justify-between p-3 bg-amber-50 dark:bg-gray-900 rounded-lg hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700 transition-colors"
             >
               <div className="flex items-center gap-3">
                 <Download className="w-5 h-5 text-orange-500" />
                 <div className="text-left">
-                  <p className="font-medium text-amber-950">Daten exportieren</p>
-                  <p className="text-sm text-amber-600">Backup als JSON-Datei</p>
+                  <p className="font-medium text-amber-950 dark:text-white">Daten exportieren</p>
+                  <p className="text-sm text-amber-600 dark:text-gray-400">Backup als JSON-Datei</p>
                 </div>
               </div>
               <ChevronRight className="w-5 h-5 text-amber-400" />
             </button>
 
-            <label className="w-full flex items-center justify-between p-3 bg-amber-50 rounded-lg hover:bg-amber-100 transition-colors cursor-pointer">
+            <label className="w-full flex items-center justify-between p-3 bg-amber-50 dark:bg-gray-900 rounded-lg hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700 transition-colors cursor-pointer">
               <div className="flex items-center gap-3">
                 <Upload className="w-5 h-5 text-orange-500" />
                 <div className="text-left">
-                  <p className="font-medium text-amber-950">Daten importieren</p>
-                  <p className="text-sm text-amber-600">Backup wiederherstellen</p>
+                  <p className="font-medium text-amber-950 dark:text-white">Daten importieren</p>
+                  <p className="text-sm text-amber-600 dark:text-gray-400">Backup wiederherstellen</p>
                 </div>
               </div>
               <ChevronRight className="w-5 h-5 text-amber-400" />
@@ -382,12 +382,12 @@ export const SettingsPage: React.FC = () => {
             <div className="w-20 h-20 bg-orange-500 rounded-2xl mx-auto mb-4 flex items-center justify-center">
               <Settings className="w-10 h-10 text-white" />
             </div>
-            <h3 className="text-xl font-bold text-amber-950 mb-1">KochPlan</h3>
-            <p className="text-amber-600 mb-4">Dein intelligenter Essensplaner</p>
+            <h3 className="text-xl font-bold text-amber-950 dark:text-white mb-1">KochPlan</h3>
+            <p className="text-amber-600 dark:text-gray-400 mb-4">Dein intelligenter Essensplaner</p>
             <p className="text-sm text-amber-500">Version {appVersion}</p>
           </div>
 
-          <div className="border-t border-amber-100 pt-4 mt-4">
+          <div className="border-t border-amber-100 dark:border-gray-700 pt-4 mt-4">
             <button
               onClick={() => setShowResetConfirm(true)}
               className="w-full py-2 text-red-500 hover:text-red-600 text-sm"
@@ -401,12 +401,12 @@ export const SettingsPage: React.FC = () => {
       {/* Reset Confirm Dialog */}
       {showResetConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-sm w-full p-6 text-center">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-sm w-full p-6 text-center">
             <AlertCircle className="w-12 h-12 text-orange-500 mx-auto mb-4" />
-            <h2 className="text-xl font-bold text-amber-950 mb-2">
+            <h2 className="text-xl font-bold text-amber-950 dark:text-white mb-2">
               Einstellungen zurücksetzen?
             </h2>
-            <p className="text-amber-600 mb-6">
+            <p className="text-amber-600 dark:text-gray-400 mb-6">
               Alle Einstellungen werden auf die Standardwerte zurückgesetzt. Deine Rezepte und Daten bleiben erhalten.
             </p>
             <div className="flex gap-3">
@@ -432,12 +432,12 @@ export const SettingsPage: React.FC = () => {
       {/* Clear Data Confirm Dialog */}
       {showClearDataConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-sm w-full p-6 text-center">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-sm w-full p-6 text-center">
             <Trash2 className="w-12 h-12 text-red-500 mx-auto mb-4" />
-            <h2 className="text-xl font-bold text-amber-950 mb-2">
+            <h2 className="text-xl font-bold text-amber-950 dark:text-white mb-2">
               Alle Daten löschen?
             </h2>
-            <p className="text-amber-600 mb-6">
+            <p className="text-amber-600 dark:text-gray-400 mb-6">
               Dies löscht alle Rezepte, Wochenpläne und Einkaufslisten unwiderruflich.
             </p>
             <div className="flex gap-3">

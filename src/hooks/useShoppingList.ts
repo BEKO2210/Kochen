@@ -58,6 +58,9 @@ export interface UseShoppingListReturn {
   addCategory: (category: string) => void;
   removeCategory: (category: string) => void;
 
+  // Combined Operations
+  createListWithIngredients: (name: string, ingredients: Ingredient[], recipeSource?: string) => string;
+
   // Export
   exportToText: () => string;
   exportToMarkdown: () => string;
@@ -566,6 +569,37 @@ export function useShoppingList(): UseShoppingListReturn {
   );
 
   /**
+   * Erstellt eine neue Liste und fügt sofort Zutaten hinzu (verhindert Race Condition)
+   */
+  const createListWithIngredients = useCallback(
+    (name: string, ingredients: Ingredient[], recipeSource?: string): string => {
+      const id = generateId();
+      const items: ShoppingItem[] = ingredients.map((ing) => ({
+        id: generateId(),
+        name: ing.name,
+        amount: ing.amount,
+        unit: ing.unit,
+        category: ing.category || 'Sonstiges',
+        checked: false,
+        recipeSource,
+      }));
+
+      const newList: ShoppingList = {
+        id,
+        name,
+        items,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+
+      setLists((prev) => [...prev, newList]);
+      setCurrentListId(id);
+      return id;
+    },
+    []
+  );
+
+  /**
    * Gibt Items nach Kategorie gruppiert zurück
    */
   const getItemsByCategory = useCallback((): Record<string, ShoppingItem[]> => {
@@ -713,6 +747,7 @@ export function useShoppingList(): UseShoppingListReturn {
     clearList,
     addItems,
     addFromIngredients,
+    createListWithIngredients,
     getItemsByCategory,
     getCheckedItems,
     getUncheckedItems,

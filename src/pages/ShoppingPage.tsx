@@ -166,22 +166,22 @@ export const ShoppingPage: React.FC = () => {
   // Loading state
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-amber-50 flex items-center justify-center">
+      <div className="min-h-screen bg-amber-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin" />
-          <p className="text-amber-700">Lade Einkaufslisten...</p>
+          <p className="text-amber-700 dark:text-gray-300">Lade Einkaufslisten...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-amber-50 pb-24">
+    <div className="min-h-screen bg-amber-50 dark:bg-gray-900 pb-24">
       {/* Header */}
-      <header className="bg-white border-b border-amber-100 sticky top-0 z-10">
+      <header className="bg-white dark:bg-gray-800 border-b border-amber-100 dark:border-gray-700 sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
-            <h1 className="text-2xl font-bold text-amber-950 flex items-center gap-2">
+            <h1 className="text-2xl font-bold text-amber-950 dark:text-white flex items-center gap-2">
               <ShoppingCart className="w-7 h-7 text-orange-500" />
               Einkaufsliste
             </h1>
@@ -205,7 +205,7 @@ export const ShoppingPage: React.FC = () => {
                   className={`px-4 py-2 rounded-lg whitespace-nowrap transition-colors ${
                     currentList?.id === list.id
                       ? 'bg-orange-500 text-white'
-                      : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                      : 'bg-amber-100 dark:bg-gray-700 text-amber-700 dark:text-gray-300 hover:bg-amber-200 dark:hover:bg-gray-600'
                   }`}
                 >
                   {list.name}
@@ -221,7 +221,7 @@ export const ShoppingPage: React.FC = () => {
         {currentList ? (
           <>
             {/* List Header */}
-            <div className="bg-white rounded-xl shadow-sm p-4 mb-4">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 mb-4">
               <div className="flex items-center justify-between mb-3">
                 {editingListName ? (
                   <div className="flex items-center gap-2 flex-1">
@@ -251,7 +251,7 @@ export const ShoppingPage: React.FC = () => {
                       setEditedListName(currentList.name);
                       setEditingListName(true);
                     }}
-                    className="text-xl font-bold text-amber-950 cursor-pointer hover:text-orange-600"
+                    className="text-xl font-bold text-amber-950 dark:text-white cursor-pointer hover:text-orange-600"
                   >
                     {currentList.name}
                   </h2>
@@ -260,33 +260,33 @@ export const ShoppingPage: React.FC = () => {
                 <div className="flex items-center gap-1">
                   <button
                     onClick={handleShare}
-                    className="p-2 hover:bg-amber-100 rounded-lg transition-colors"
+                    className="p-2 hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700 rounded-lg transition-colors"
                     title="Teilen"
                   >
-                    <Share2 className="w-5 h-5 text-amber-700" />
+                    <Share2 className="w-5 h-5 text-amber-700 dark:text-gray-300" />
                   </button>
                   <button
                     onClick={handleExport}
-                    className="p-2 hover:bg-amber-100 rounded-lg transition-colors"
+                    className="p-2 hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700 rounded-lg transition-colors"
                     title="Exportieren"
                   >
-                    <Download className="w-5 h-5 text-amber-700" />
+                    <Download className="w-5 h-5 text-amber-700 dark:text-gray-300" />
                   </button>
                   <div className="relative">
                     <button
                       onClick={() => setShowListMenu(!showListMenu)}
-                      className="p-2 hover:bg-amber-100 rounded-lg transition-colors"
+                      className="p-2 hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700 rounded-lg transition-colors"
                     >
-                      <MoreVertical className="w-5 h-5 text-amber-700" />
+                      <MoreVertical className="w-5 h-5 text-amber-700 dark:text-gray-300" />
                     </button>
                     {showListMenu && (
-                      <div className="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-lg border border-amber-100 py-1 z-20 min-w-[150px]">
+                      <div className="absolute right-0 top-full mt-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-amber-100 dark:border-gray-700 py-1 z-20 min-w-[150px]">
                         <button
                           onClick={() => {
                             checkAll();
                             setShowListMenu(false);
                           }}
-                          className="w-full px-4 py-2 text-left hover:bg-amber-50 text-sm"
+                          className="w-full px-4 py-2 text-left hover:bg-amber-50 dark:bg-gray-900 text-sm"
                         >
                           Alle abhaken
                         </button>
@@ -295,7 +295,7 @@ export const ShoppingPage: React.FC = () => {
                             uncheckAll();
                             setShowListMenu(false);
                           }}
-                          className="w-full px-4 py-2 text-left hover:bg-amber-50 text-sm"
+                          className="w-full px-4 py-2 text-left hover:bg-amber-50 dark:bg-gray-900 text-sm"
                         >
                           Alle deaktivieren
                         </button>
@@ -304,11 +304,11 @@ export const ShoppingPage: React.FC = () => {
                             removeChecked();
                             setShowListMenu(false);
                           }}
-                          className="w-full px-4 py-2 text-left hover:bg-amber-50 text-sm"
+                          className="w-full px-4 py-2 text-left hover:bg-amber-50 dark:bg-gray-900 text-sm"
                         >
                           Abgehakte entfernen
                         </button>
-                        <hr className="my-1 border-amber-100" />
+                        <hr className="my-1 border-amber-100 dark:border-gray-700" />
                         <button
                           onClick={() => {
                             if (confirm('Möchtest du diese Liste wirklich löschen?')) {
@@ -328,13 +328,13 @@ export const ShoppingPage: React.FC = () => {
 
               {/* Progress */}
               <div className="flex items-center gap-3">
-                <div className="flex-1 h-2 bg-amber-100 rounded-full overflow-hidden">
+                <div className="flex-1 h-2 bg-amber-100 dark:bg-gray-700 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-orange-500 transition-all duration-300"
                     style={{ width: `${progress.percentage}%` }}
                   />
                 </div>
-                <span className="text-sm text-amber-600 whitespace-nowrap">
+                <span className="text-sm text-amber-600 dark:text-gray-400 whitespace-nowrap">
                   {progress.checked}/{progress.total}
                 </span>
               </div>
@@ -343,7 +343,7 @@ export const ShoppingPage: React.FC = () => {
             {/* Add Item Button */}
             <button
               onClick={() => setShowAddItem(true)}
-              className="w-full p-4 bg-white rounded-xl shadow-sm mb-4 flex items-center justify-center gap-2 text-orange-600 hover:bg-orange-50 transition-colors"
+              className="w-full p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm mb-4 flex items-center justify-center gap-2 text-orange-600 hover:bg-orange-50 transition-colors"
             >
               <Plus className="w-5 h-5" />
               Artikel hinzufügen
@@ -353,20 +353,20 @@ export const ShoppingPage: React.FC = () => {
             {Object.entries(groupedItems).length > 0 ? (
               <div className="space-y-4">
                 {Object.entries(groupedItems).map(([category, items]) => (
-                  <div key={category} className="bg-white rounded-xl shadow-sm overflow-hidden">
+                  <div key={category} className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
                     <button
                       onClick={() => toggleCategory(category)}
-                      className="w-full px-4 py-3 bg-amber-50 flex items-center justify-between"
+                      className="w-full px-4 py-3 bg-amber-50 dark:bg-gray-900 flex items-center justify-between"
                     >
-                      <span className="font-medium text-amber-950">{category}</span>
+                      <span className="font-medium text-amber-950 dark:text-white">{category}</span>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm text-amber-600">
+                        <span className="text-sm text-amber-600 dark:text-gray-400">
                           {items.filter(i => i.checked).length}/{items.length}
                         </span>
                         {expandedCategories.has(category) ? (
-                          <ChevronUp className="w-4 h-4 text-amber-600" />
+                          <ChevronUp className="w-4 h-4 text-amber-600 dark:text-gray-400" />
                         ) : (
-                          <ChevronDown className="w-4 h-4 text-amber-600" />
+                          <ChevronDown className="w-4 h-4 text-amber-600 dark:text-gray-400" />
                         )}
                       </div>
                     </button>
@@ -375,7 +375,7 @@ export const ShoppingPage: React.FC = () => {
                         {items.map((item) => (
                           <div
                             key={item.id}
-                            className={`flex items-center gap-3 p-3 hover:bg-amber-50 transition-colors ${
+                            className={`flex items-center gap-3 p-3 hover:bg-amber-50 dark:bg-gray-900 transition-colors ${
                               item.checked ? 'bg-green-50' : ''
                             }`}
                           >
@@ -390,10 +390,10 @@ export const ShoppingPage: React.FC = () => {
                               {item.checked && <Check className="w-4 h-4 text-white" />}
                             </button>
                             <div className="flex-1">
-                              <p className={`font-medium ${item.checked ? 'text-green-700 line-through' : 'text-amber-950'}`}>
+                              <p className={`font-medium ${item.checked ? 'text-green-700 line-through' : 'text-amber-950 dark:text-white'}`}>
                                 {item.name}
                               </p>
-                              <p className={`text-sm ${item.checked ? 'text-green-600' : 'text-amber-600'}`}>
+                              <p className={`text-sm ${item.checked ? 'text-green-600' : 'text-amber-600 dark:text-gray-400'}`}>
                                 {item.amount} {item.unit}
                                 {item.recipeSource && ` • ${item.recipeSource}`}
                               </p>
@@ -412,12 +412,12 @@ export const ShoppingPage: React.FC = () => {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12 bg-white rounded-xl shadow-sm">
+              <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
                 <ShoppingCart className="w-16 h-16 text-amber-300 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-amber-950 mb-2">
+                <h3 className="text-lg font-semibold text-amber-950 dark:text-white mb-2">
                   Noch keine Artikel
                 </h3>
-                <p className="text-amber-600 mb-4">
+                <p className="text-amber-600 dark:text-gray-400 mb-4">
                   Füge Artikel hinzu oder generiere eine Liste aus deinem Wochenplan.
                 </p>
                 <Button variant="primary" onClick={() => navigate('/planner')}>
@@ -430,10 +430,10 @@ export const ShoppingPage: React.FC = () => {
           /* No List Selected */
           <div className="text-center py-12">
             <ShoppingCart className="w-16 h-16 text-amber-300 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-amber-950 mb-2">
+            <h3 className="text-lg font-semibold text-amber-950 dark:text-white mb-2">
               Keine Liste ausgewählt
             </h3>
-            <p className="text-amber-600 mb-4">
+            <p className="text-amber-600 dark:text-gray-400 mb-4">
               Erstelle eine neue Einkaufsliste oder wähle eine bestehende aus.
             </p>
             <Button variant="primary" onClick={() => setShowNewListDialog(true)}>
@@ -447,8 +447,8 @@ export const ShoppingPage: React.FC = () => {
       {/* New List Dialog */}
       {showNewListDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6">
-            <h2 className="text-xl font-bold text-amber-950 mb-4">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-md w-full p-6">
+            <h2 className="text-xl font-bold text-amber-950 dark:text-white mb-4">
               Neue Einkaufsliste
             </h2>
             <Input
@@ -486,8 +486,8 @@ export const ShoppingPage: React.FC = () => {
       {/* Add Item Dialog */}
       {showAddItem && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6">
-            <h2 className="text-xl font-bold text-amber-950 mb-4">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-md w-full p-6">
+            <h2 className="text-xl font-bold text-amber-950 dark:text-white mb-4">
               Artikel hinzufügen
             </h2>
             <div className="space-y-3 mb-4">
