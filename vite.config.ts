@@ -20,8 +20,8 @@ export default defineConfig({
         background_color: '#FFFBEB',
         display: 'standalone',
         orientation: 'portrait',
-        scope: '/',
-        start_url: '/',
+        scope: '/Kochen/',
+        start_url: '/Kochen/',
         lang: 'de-DE',
         dir: 'ltr',
         icons: [

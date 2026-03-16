@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { BrowserRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
 // Pages
@@ -17,6 +17,8 @@ import { OfflineBanner } from './components/ui/OfflineBanner';
 
 // Store
 import { useIsDarkMode } from './store';
+
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 // Tab to route mapping
 const tabToRoute: Record<NavTab, string> = {
@@ -71,7 +73,7 @@ function App() {
   }, [isDarkMode]);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <div className="min-h-screen flex flex-col bg-amber-50 dark:bg-gray-900">
         <OfflineBanner />
 
