@@ -16,8 +16,8 @@ export default defineConfig({
         name: 'KochPlan',
         short_name: 'KochPlan',
         description: 'Dein intelligenter Essensplaner und Einkaufslisten-Manager',
-        theme_color: '#F97316',
-        background_color: '#FFFBEB',
+        theme_color: '#0F1B3D',
+        background_color: '#0F1B3D',
         display: 'standalone',
         orientation: 'portrait',
         scope: '/Kochen/',
@@ -94,14 +94,14 @@ export default defineConfig({
             name: 'Essensplan',
             short_name: 'Plan',
             description: 'Öffne deinen Essensplan',
-            url: '/meal-plan',
+            url: '/planner',
             icons: [{ src: '/icons/shortcut-plan.png', sizes: '96x96' }]
           },
           {
             name: 'Einkaufsliste',
             short_name: 'Einkauf',
             description: 'Öffne deine Einkaufsliste',
-            url: '/shopping-list',
+            url: '/shopping',
             icons: [{ src: '/icons/shortcut-shopping.png', sizes: '96x96' }]
           },
           {
@@ -209,14 +209,10 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       '@components': path.resolve(__dirname, './src/components'),
       '@hooks': path.resolve(__dirname, './src/hooks'),
-      '@stores': path.resolve(__dirname, './src/stores'),
       '@types': path.resolve(__dirname, './src/types'),
       '@utils': path.resolve(__dirname, './src/utils'),
       '@lib': path.resolve(__dirname, './src/lib'),
-      '@assets': path.resolve(__dirname, './src/assets'),
-      '@pages': path.resolve(__dirname, './src/pages'),
-      '@services': path.resolve(__dirname, './src/services'),
-      '@db': path.resolve(__dirname, './src/db')
+      '@pages': path.resolve(__dirname, './src/pages')
     }
   },
   build: {
@@ -235,21 +231,8 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
-          ui: ['framer-motion', 'lucide-react'],
+          ui: ['lucide-react'],
           state: ['zustand'],
-          db: ['dexie', 'dexie-react-hooks'],
-          radix: [
-            '@radix-ui/react-dialog',
-            '@radix-ui/react-dropdown-menu',
-            '@radix-ui/react-select',
-            '@radix-ui/react-tabs',
-            '@radix-ui/react-toast',
-            '@radix-ui/react-tooltip',
-            '@radix-ui/react-popover',
-            '@radix-ui/react-slider',
-            '@radix-ui/react-checkbox',
-            '@radix-ui/react-label'
-          ]
         }
       }
     },
@@ -268,7 +251,6 @@ export default defineConfig({
     devSourcemap: true
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', 'zustand', 'dexie'],
-    exclude: ['@radix-ui/react-dialog']
+    include: ['react', 'react-dom', 'react-router-dom', 'zustand', 'lucide-react']
   }
 });

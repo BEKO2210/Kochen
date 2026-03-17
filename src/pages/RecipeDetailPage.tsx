@@ -169,10 +169,10 @@ export const RecipeDetailPage: React.FC = () => {
   // Loading state
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-amber-50 flex items-center justify-center">
+      <div className="min-h-screen bg-amber-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin" />
-          <p className="text-amber-700">Lade Rezept...</p>
+          <p className="text-amber-700 dark:text-gray-300">Lade Rezept...</p>
         </div>
       </div>
     );
@@ -181,13 +181,13 @@ export const RecipeDetailPage: React.FC = () => {
   // Error state
   if (error || !recipe) {
     return (
-      <div className="min-h-screen bg-amber-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-amber-50 dark:bg-gray-900 flex items-center justify-center p-4">
         <div className="text-center max-w-md">
           <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-amber-950 mb-2">
+          <h1 className="text-2xl font-bold text-amber-950 dark:text-white mb-2">
             {error || 'Rezept nicht gefunden'}
           </h1>
-          <p className="text-amber-600 mb-6">
+          <p className="text-amber-600 dark:text-gray-400 mb-6">
             Das gesuchte Rezept existiert nicht oder wurde gelöscht.
           </p>
           <Button variant="primary" onClick={() => navigate('/recipes')}>
@@ -201,14 +201,14 @@ export const RecipeDetailPage: React.FC = () => {
   const totalTime = recipe.prepTime + recipe.cookTime;
 
   return (
-    <div className="min-h-screen bg-amber-50 pb-24">
+    <div className="min-h-screen bg-amber-50 dark:bg-gray-900 pb-24">
       {/* Header */}
-      <header className="bg-white border-b border-amber-100 sticky top-0 z-10">
+      <header className="bg-white dark:bg-gray-800 border-b border-amber-100 dark:border-gray-700 sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <button
               onClick={() => navigate('/recipes')}
-              className="flex items-center gap-2 text-amber-700 hover:text-orange-600 transition-colors"
+              className="flex items-center gap-2 text-amber-700 dark:text-gray-300 hover:text-orange-600 transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
               Zurück
@@ -216,17 +216,17 @@ export const RecipeDetailPage: React.FC = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleShare}
-                className="p-2 rounded-lg hover:bg-amber-100 transition-colors"
+                className="p-2 rounded-lg hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700 transition-colors"
                 title="Teilen"
               >
-                <Share2 className="w-5 h-5 text-amber-700" />
+                <Share2 className="w-5 h-5 text-amber-700 dark:text-gray-300" />
               </button>
               <button
                 onClick={handleEdit}
-                className="p-2 rounded-lg hover:bg-amber-100 transition-colors"
+                className="p-2 rounded-lg hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700 transition-colors"
                 title="Bearbeiten"
               >
-                <Edit3 className="w-5 h-5 text-amber-700" />
+                <Edit3 className="w-5 h-5 text-amber-700 dark:text-gray-300" />
               </button>
             </div>
           </div>
@@ -235,7 +235,7 @@ export const RecipeDetailPage: React.FC = () => {
 
       <main className="max-w-4xl mx-auto px-4 py-6">
         {/* Hero Image */}
-        <div className="relative h-64 md:h-80 bg-amber-100 rounded-2xl overflow-hidden mb-6">
+        <div className="relative h-64 md:h-80 bg-amber-100 dark:bg-gray-700 rounded-2xl overflow-hidden mb-6">
           {recipe.imageUrl ? (
             <img
               src={recipe.imageUrl}
@@ -254,7 +254,7 @@ export const RecipeDetailPage: React.FC = () => {
             className={`absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center transition-all ${
               recipe.isFavorite
                 ? 'bg-red-500 text-white'
-                : 'bg-white/90 text-amber-700 hover:bg-white'
+                : 'bg-white dark:bg-gray-800/90 text-amber-700 dark:text-gray-300 hover:bg-white dark:bg-gray-800'
             }`}
           >
             <svg
@@ -282,40 +282,40 @@ export const RecipeDetailPage: React.FC = () => {
 
         {/* Title & Description */}
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-amber-950 mb-3">{recipe.title}</h1>
+          <h1 className="text-3xl font-bold text-amber-950 dark:text-white mb-3">{recipe.title}</h1>
           {recipe.description && (
-            <p className="text-amber-700 leading-relaxed">{recipe.description}</p>
+            <p className="text-amber-700 dark:text-gray-300 leading-relaxed">{recipe.description}</p>
           )}
         </div>
 
         {/* Meta Info */}
-        <div className="flex flex-wrap gap-4 mb-6 p-4 bg-white rounded-xl shadow-sm">
+        <div className="flex flex-wrap gap-4 mb-6 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
           <div className="flex items-center gap-2">
             <Clock className="w-5 h-5 text-orange-500" />
             <div>
-              <p className="text-xs text-amber-600">Vorbereitung</p>
-              <p className="font-medium text-amber-950">{recipe.prepTime} min</p>
+              <p className="text-xs text-amber-600 dark:text-gray-400">Vorbereitung</p>
+              <p className="font-medium text-amber-950 dark:text-white">{recipe.prepTime} min</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <Clock className="w-5 h-5 text-orange-500" />
             <div>
-              <p className="text-xs text-amber-600">Kochen</p>
-              <p className="font-medium text-amber-950">{recipe.cookTime} min</p>
+              <p className="text-xs text-amber-600 dark:text-gray-400">Kochen</p>
+              <p className="font-medium text-amber-950 dark:text-white">{recipe.cookTime} min</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <Clock className="w-5 h-5 text-orange-500" />
             <div>
-              <p className="text-xs text-amber-600">Gesamt</p>
-              <p className="font-medium text-amber-950">{totalTime} min</p>
+              <p className="text-xs text-amber-600 dark:text-gray-400">Gesamt</p>
+              <p className="font-medium text-amber-950 dark:text-white">{totalTime} min</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <Users className="w-5 h-5 text-orange-500" />
             <div>
-              <p className="text-xs text-amber-600">Portionen</p>
-              <p className="font-medium text-amber-950">{recipe.servings}</p>
+              <p className="text-xs text-amber-600 dark:text-gray-400">Portionen</p>
+              <p className="font-medium text-amber-950 dark:text-white">{recipe.servings}</p>
             </div>
           </div>
         </div>
@@ -364,8 +364,8 @@ export const RecipeDetailPage: React.FC = () => {
         </div>
 
         {/* Ingredients */}
-        <div className="bg-white rounded-2xl shadow-sm p-6 mb-6">
-          <h2 className="text-xl font-bold text-amber-950 mb-4">Zutaten</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6 mb-6">
+          <h2 className="text-xl font-bold text-amber-950 dark:text-white mb-4">Zutaten</h2>
           <div className="space-y-2">
             {recipe.ingredients.map((ingredient) => (
               <div
@@ -374,7 +374,7 @@ export const RecipeDetailPage: React.FC = () => {
                 className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-colors ${
                   checkedIngredients.has(ingredient.id || ingredient.name)
                     ? 'bg-green-50'
-                    : 'hover:bg-amber-50'
+                    : 'hover:bg-amber-50 dark:bg-gray-900'
                 }`}
               >
                 <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${
@@ -391,7 +391,7 @@ export const RecipeDetailPage: React.FC = () => {
                 <span className={`flex-1 ${
                   checkedIngredients.has(ingredient.id || ingredient.name)
                     ? 'text-green-700 line-through'
-                    : 'text-amber-950'
+                    : 'text-amber-950 dark:text-white'
                 }`}>
                   {scaleAmount(ingredient.amount)} {ingredient.unit} {ingredient.name}
                 </span>
@@ -404,8 +404,8 @@ export const RecipeDetailPage: React.FC = () => {
         </div>
 
         {/* Steps */}
-        <div className="bg-white rounded-2xl shadow-sm p-6 mb-6">
-          <h2 className="text-xl font-bold text-amber-950 mb-4">Zubereitung</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6 mb-6">
+          <h2 className="text-xl font-bold text-amber-950 dark:text-white mb-4">Zubereitung</h2>
           <div className="space-y-4">
             {recipe.steps.map((step, index) => (
               <div
@@ -414,7 +414,7 @@ export const RecipeDetailPage: React.FC = () => {
                 className={`flex gap-4 p-4 rounded-xl cursor-pointer transition-colors ${
                   completedSteps.has(step.id || `${index}`)
                     ? 'bg-green-50 border border-green-200'
-                    : 'bg-amber-50 hover:bg-amber-100'
+                    : 'bg-amber-50 dark:bg-gray-900 hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700'
                 }`}
               >
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm ${
@@ -434,7 +434,7 @@ export const RecipeDetailPage: React.FC = () => {
                   <p className={`leading-relaxed ${
                     completedSteps.has(step.id || `${index}`)
                       ? 'text-green-700 line-through'
-                      : 'text-amber-950'
+                      : 'text-amber-950 dark:text-white'
                   }`}>
                     {step.description}
                   </p>
@@ -460,7 +460,7 @@ export const RecipeDetailPage: React.FC = () => {
 
         {/* Source */}
         {recipe.source && (
-          <div className="text-sm text-amber-600">
+          <div className="text-sm text-amber-600 dark:text-gray-400">
             Quelle: {recipe.source}
           </div>
         )}

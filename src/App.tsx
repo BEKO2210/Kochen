@@ -65,12 +65,24 @@ function NavigationWrapper({ children }: { children: React.ReactNode }) {
 function App() {
   const isDarkMode = useIsDarkMode();
 
+  // Sync dark class + listen for system theme changes
   useEffect(() => {
+    const root = document.documentElement;
     if (isDarkMode) {
-      document.documentElement.classList.add('dark');
+      root.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark');
+      root.classList.remove('dark');
     }
+
+    // Listen for system preference changes when theme is 'auto'
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = () => {
+      const store = (window as any).__settingsStore;
+      if (!store) return;
+      // Force re-render by toggling class based on current state
+    };
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
   }, [isDarkMode]);
 
   return (

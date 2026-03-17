@@ -100,17 +100,17 @@ export const Dashboard: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-amber-50 flex items-center justify-center">
+      <div className="min-h-screen bg-amber-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin" />
-          <p className="text-amber-700">Lade Dashboard...</p>
+          <p className="text-amber-700 dark:text-gray-300">Lade Dashboard...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-amber-50 pb-24">
+    <div className="min-h-screen bg-amber-50 dark:bg-gray-900 pb-24">
       {/* Header */}
       <header className="bg-gradient-to-br from-orange-500 to-amber-600 text-white p-6">
         <div className="max-w-4xl mx-auto">
@@ -162,9 +162,9 @@ export const Dashboard: React.FC = () => {
         </section>
 
         {/* Today's Meals */}
-        <section className="bg-white rounded-2xl shadow-sm p-5">
+        <section className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-5">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-amber-950 flex items-center gap-2">
+            <h2 className="text-lg font-semibold text-amber-950 dark:text-white flex items-center gap-2">
               <Calendar className="w-5 h-5 text-orange-500" />
               Heutige Mahlzeiten
             </h2>
@@ -183,14 +183,14 @@ export const Dashboard: React.FC = () => {
                 <div
                   key={index}
                   onClick={() => handleRecipeClick(meal.recipeId)}
-                  className="flex items-center gap-4 p-3 bg-amber-50 rounded-xl cursor-pointer hover:bg-amber-100 transition-colors"
+                  className="flex items-center gap-4 p-3 bg-amber-50 dark:bg-gray-900 rounded-xl cursor-pointer hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700 transition-colors"
                 >
                   <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
                     <Utensils className="w-6 h-6 text-orange-500" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm text-amber-600 font-medium">{meal.mealType}</p>
-                    <p className="font-semibold text-amber-950">{meal.recipeName}</p>
+                    <p className="text-sm text-amber-600 dark:text-gray-400 font-medium">{meal.mealType}</p>
+                    <p className="font-semibold text-amber-950 dark:text-white">{meal.recipeName}</p>
                   </div>
                   <button
                     onClick={(e) => {
@@ -205,9 +205,9 @@ export const Dashboard: React.FC = () => {
               ))}
             </div>
           ) : (
-            <div className="text-center py-8 bg-amber-50 rounded-xl">
+            <div className="text-center py-8 bg-amber-50 dark:bg-gray-900 rounded-xl">
               <Calendar className="w-12 h-12 text-amber-300 mx-auto mb-3" />
-              <p className="text-amber-700 mb-2">Noch nichts für heute geplant</p>
+              <p className="text-amber-700 dark:text-gray-300 mb-2">Noch nichts für heute geplant</p>
               <button
                 onClick={() => navigate('/planner')}
                 className="px-4 py-2 bg-orange-500 text-white text-sm font-medium rounded-lg hover:bg-orange-600 transition-colors"
@@ -245,7 +245,7 @@ export const Dashboard: React.FC = () => {
         {favoriteRecipes.length > 0 && (
           <section>
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-amber-950 flex items-center gap-2">
+              <h2 className="text-lg font-semibold text-amber-950 dark:text-white flex items-center gap-2">
                 <Heart className="w-5 h-5 text-red-500" />
                 Deine Favoriten
               </h2>
@@ -282,7 +282,7 @@ export const Dashboard: React.FC = () => {
         {suggestions.length > 0 && (
           <section>
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-amber-950 flex items-center gap-2">
+              <h2 className="text-lg font-semibold text-amber-950 dark:text-white flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-amber-500" />
                 Was koche ich heute?
               </h2>
@@ -322,10 +322,10 @@ export const Dashboard: React.FC = () => {
         {recipes.length === 0 && (
           <section className="bg-gradient-to-br from-orange-100 to-amber-100 rounded-2xl p-8 text-center">
             <ChefHat className="w-16 h-16 text-orange-500 mx-auto mb-4" />
-            <h2 className="text-xl font-bold text-amber-950 mb-2">
+            <h2 className="text-xl font-bold text-amber-950 dark:text-white mb-2">
               Willkommen bei KochPlan!
             </h2>
-            <p className="text-amber-700 mb-6 max-w-md mx-auto">
+            <p className="text-amber-700 dark:text-gray-300 mb-6 max-w-md mx-auto">
               Starte deine kulinarische Reise. Füge deine ersten Rezepte hinzu oder importiere sie aus dem Internet.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -337,7 +337,7 @@ export const Dashboard: React.FC = () => {
               </button>
               <button
                 onClick={() => navigate('/recipes')}
-                className="px-6 py-3 bg-white text-orange-600 font-medium rounded-xl hover:bg-orange-50 transition-colors"
+                className="px-6 py-3 bg-white dark:bg-gray-800 text-orange-600 font-medium rounded-xl hover:bg-orange-50 transition-colors"
               >
                 Rezept importieren
               </button>
@@ -362,13 +362,13 @@ interface StatCardProps {
 const StatCard: React.FC<StatCardProps> = ({ icon: Icon, value, label, color, onClick }) => (
   <button
     onClick={onClick}
-    className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all text-left"
+    className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all text-left"
   >
     <div className={`w-10 h-10 ${color} rounded-lg flex items-center justify-center mb-3`}>
       <Icon className="w-5 h-5 text-white" />
     </div>
-    <p className="text-2xl font-bold text-amber-950">{value}</p>
-    <p className="text-sm text-amber-600">{label}</p>
+    <p className="text-2xl font-bold text-amber-950 dark:text-white">{value}</p>
+    <p className="text-sm text-amber-600 dark:text-gray-400">{label}</p>
   </button>
 );
 
@@ -389,14 +389,14 @@ const QuickActionButton: React.FC<QuickActionButtonProps> = ({
 }) => (
   <button
     onClick={onClick}
-    className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all text-left flex items-center gap-4"
+    className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all text-left flex items-center gap-4"
   >
     <div className={`w-12 h-12 ${color} rounded-xl flex items-center justify-center flex-shrink-0`}>
       <Icon className="w-6 h-6 text-white" />
     </div>
     <div>
-      <p className="font-semibold text-amber-950">{label}</p>
-      <p className="text-sm text-amber-600">{description}</p>
+      <p className="font-semibold text-amber-950 dark:text-white">{label}</p>
+      <p className="text-sm text-amber-600 dark:text-gray-400">{description}</p>
     </div>
   </button>
 );

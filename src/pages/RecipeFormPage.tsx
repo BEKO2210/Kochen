@@ -142,15 +142,15 @@ export const RecipeFormPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-amber-50 pb-24">
+    <div className="min-h-screen bg-amber-50 dark:bg-gray-900 pb-24">
       {/* Header */}
-      <header className="bg-white border-b border-amber-100 sticky top-0 z-10">
+      <header className="bg-white dark:bg-gray-800 border-b border-amber-100 dark:border-gray-700 sticky top-0 z-10">
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <button onClick={() => navigate(-1)} className="p-2 hover:bg-amber-100 rounded-lg">
-              <ArrowLeft className="w-5 h-5 text-amber-700" />
+            <button onClick={() => navigate(-1)} className="p-2 hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700 rounded-lg">
+              <ArrowLeft className="w-5 h-5 text-amber-700 dark:text-gray-300" />
             </button>
-            <h1 className="text-xl font-bold text-amber-950">
+            <h1 className="text-xl font-bold text-amber-950 dark:text-white">
               {isEditing ? 'Rezept bearbeiten' : 'Neues Rezept'}
             </h1>
           </div>
@@ -168,52 +168,52 @@ export const RecipeFormPage: React.FC = () => {
 
       <main className="max-w-2xl mx-auto px-4 py-6 space-y-6">
         {/* Basic Info */}
-        <section className="bg-white rounded-2xl p-6 shadow-sm space-y-4">
-          <h2 className="font-semibold text-amber-950 flex items-center gap-2">
+        <section className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm space-y-4">
+          <h2 className="font-semibold text-amber-950 dark:text-white flex items-center gap-2">
             <ChefHat className="w-5 h-5 text-orange-500" />
             Grunddaten
           </h2>
 
           <div>
-            <label className="block text-sm font-medium text-amber-700 mb-1">Titel *</label>
+            <label className="block text-sm font-medium text-amber-700 dark:text-gray-300 mb-1">Titel *</label>
             <input
               type="text"
               value={title}
               onChange={e => setTitle(e.target.value)}
               placeholder="z.B. Spaghetti Carbonara"
-              className="w-full px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950"
+              className="w-full px-4 py-3 bg-amber-50 dark:bg-gray-900 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 dark:text-white"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-amber-700 mb-1">Beschreibung</label>
+            <label className="block text-sm font-medium text-amber-700 dark:text-gray-300 mb-1">Beschreibung</label>
             <textarea
               value={description}
               onChange={e => setDescription(e.target.value)}
               placeholder="Kurze Beschreibung des Rezepts..."
               rows={3}
-              className="w-full px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 resize-none"
+              className="w-full px-4 py-3 bg-amber-50 dark:bg-gray-900 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 dark:text-white resize-none"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-amber-700 mb-1">Bild-URL</label>
+            <label className="block text-sm font-medium text-amber-700 dark:text-gray-300 mb-1">Bild-URL</label>
             <input
               type="url"
               value={imageUrl}
               onChange={e => setImageUrl(e.target.value)}
               placeholder="https://..."
-              className="w-full px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950"
+              className="w-full px-4 py-3 bg-amber-50 dark:bg-gray-900 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 dark:text-white"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-amber-700 mb-1">Kategorie</label>
+              <label className="block text-sm font-medium text-amber-700 dark:text-gray-300 mb-1">Kategorie</label>
               <select
                 value={category}
                 onChange={e => setCategory(e.target.value)}
-                className="w-full px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950"
+                className="w-full px-4 py-3 bg-amber-50 dark:bg-gray-900 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 dark:text-white"
               >
                 {CATEGORIES.map(cat => (
                   <option key={cat} value={cat}>{cat}</option>
@@ -221,7 +221,7 @@ export const RecipeFormPage: React.FC = () => {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-amber-700 mb-1">Schwierigkeit</label>
+              <label className="block text-sm font-medium text-amber-700 dark:text-gray-300 mb-1">Schwierigkeit</label>
               <div className="flex gap-2">
                 {DIFFICULTIES.map(d => (
                   <button
@@ -230,7 +230,7 @@ export const RecipeFormPage: React.FC = () => {
                     className={`flex-1 py-3 rounded-xl text-sm font-medium transition-colors ${
                       difficulty === d.value
                         ? 'bg-orange-500 text-white'
-                        : 'bg-amber-50 border border-amber-200 text-amber-700 hover:bg-amber-100'
+                        : 'bg-amber-50 dark:bg-gray-900 border border-amber-200 text-amber-700 dark:text-gray-300 hover:bg-amber-100 dark:hover:bg-gray-700 dark:bg-gray-700'
                     }`}
                   >
                     {d.label}
@@ -242,7 +242,7 @@ export const RecipeFormPage: React.FC = () => {
 
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-amber-700 mb-1">
+              <label className="block text-sm font-medium text-amber-700 dark:text-gray-300 mb-1">
                 <Clock className="w-3 h-3 inline mr-1" />Vorbereitung
               </label>
               <div className="flex items-center gap-2">
@@ -251,13 +251,13 @@ export const RecipeFormPage: React.FC = () => {
                   min={0}
                   value={prepTime}
                   onChange={e => setPrepTime(parseInt(e.target.value) || 0)}
-                  className="w-full px-3 py-3 bg-amber-50 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950"
+                  className="w-full px-3 py-3 bg-amber-50 dark:bg-gray-900 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 dark:text-white"
                 />
-                <span className="text-sm text-amber-600">min</span>
+                <span className="text-sm text-amber-600 dark:text-gray-400">min</span>
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-amber-700 mb-1">
+              <label className="block text-sm font-medium text-amber-700 dark:text-gray-300 mb-1">
                 <Clock className="w-3 h-3 inline mr-1" />Kochen
               </label>
               <div className="flex items-center gap-2">
@@ -266,40 +266,40 @@ export const RecipeFormPage: React.FC = () => {
                   min={0}
                   value={cookTime}
                   onChange={e => setCookTime(parseInt(e.target.value) || 0)}
-                  className="w-full px-3 py-3 bg-amber-50 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950"
+                  className="w-full px-3 py-3 bg-amber-50 dark:bg-gray-900 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 dark:text-white"
                 />
-                <span className="text-sm text-amber-600">min</span>
+                <span className="text-sm text-amber-600 dark:text-gray-400">min</span>
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-amber-700 mb-1">Portionen</label>
+              <label className="block text-sm font-medium text-amber-700 dark:text-gray-300 mb-1">Portionen</label>
               <input
                 type="number"
                 min={1}
                 max={50}
                 value={servings}
                 onChange={e => setServings(parseInt(e.target.value) || 1)}
-                className="w-full px-3 py-3 bg-amber-50 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950"
+                className="w-full px-3 py-3 bg-amber-50 dark:bg-gray-900 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 dark:text-white"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-amber-700 mb-1">Tags (kommagetrennt)</label>
+            <label className="block text-sm font-medium text-amber-700 dark:text-gray-300 mb-1">Tags (kommagetrennt)</label>
             <input
               type="text"
               value={tags}
               onChange={e => setTags(e.target.value)}
               placeholder="z.B. Pasta, Schnell, Italienisch"
-              className="w-full px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950"
+              className="w-full px-4 py-3 bg-amber-50 dark:bg-gray-900 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 dark:text-white"
             />
           </div>
         </section>
 
         {/* Ingredients */}
-        <section className="bg-white rounded-2xl p-6 shadow-sm space-y-4">
+        <section className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-amber-950">Zutaten</h2>
+            <h2 className="font-semibold text-amber-950 dark:text-white">Zutaten</h2>
             <button
               onClick={addIngredient}
               className="flex items-center gap-1 px-3 py-1.5 bg-orange-100 text-orange-600 rounded-lg text-sm hover:bg-orange-200 transition-colors"
@@ -318,12 +318,12 @@ export const RecipeFormPage: React.FC = () => {
                   value={ing.amount || ''}
                   onChange={e => updateIngredient(idx, 'amount', parseFloat(e.target.value) || 0)}
                   placeholder="Menge"
-                  className="w-20 px-3 py-2 bg-amber-50 border border-amber-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950"
+                  className="w-20 px-3 py-2 bg-amber-50 dark:bg-gray-900 border border-amber-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 dark:text-white"
                 />
                 <select
                   value={ing.unit}
                   onChange={e => updateIngredient(idx, 'unit', e.target.value)}
-                  className="w-20 px-2 py-2 bg-amber-50 border border-amber-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950"
+                  className="w-20 px-2 py-2 bg-amber-50 dark:bg-gray-900 border border-amber-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 dark:text-white"
                 >
                   {UNITS.map(u => <option key={u} value={u}>{u}</option>)}
                 </select>
@@ -332,7 +332,7 @@ export const RecipeFormPage: React.FC = () => {
                   value={ing.name}
                   onChange={e => updateIngredient(idx, 'name', e.target.value)}
                   placeholder="Zutat"
-                  className="flex-1 px-3 py-2 bg-amber-50 border border-amber-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950"
+                  className="flex-1 px-3 py-2 bg-amber-50 dark:bg-gray-900 border border-amber-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 dark:text-white"
                 />
                 <button
                   onClick={() => removeIngredient(idx)}
@@ -347,9 +347,9 @@ export const RecipeFormPage: React.FC = () => {
         </section>
 
         {/* Steps */}
-        <section className="bg-white rounded-2xl p-6 shadow-sm space-y-4">
+        <section className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-amber-950">Zubereitungsschritte</h2>
+            <h2 className="font-semibold text-amber-950 dark:text-white">Zubereitungsschritte</h2>
             <button
               onClick={addStep}
               className="flex items-center gap-1 px-3 py-1.5 bg-orange-100 text-orange-600 rounded-lg text-sm hover:bg-orange-200 transition-colors"
@@ -371,7 +371,7 @@ export const RecipeFormPage: React.FC = () => {
                     onChange={e => updateStep(idx, 'description', e.target.value)}
                     placeholder={`Schritt ${idx + 1} beschreiben...`}
                     rows={2}
-                    className="w-full px-3 py-2 bg-amber-50 border border-amber-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 resize-none"
+                    className="w-full px-3 py-2 bg-amber-50 dark:bg-gray-900 border border-amber-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 dark:text-white resize-none"
                   />
                   <div className="flex items-center gap-2">
                     <Clock className="w-3 h-3 text-amber-400" />
@@ -381,7 +381,7 @@ export const RecipeFormPage: React.FC = () => {
                       value={step.duration || ''}
                       onChange={e => updateStep(idx, 'duration', parseInt(e.target.value) || undefined)}
                       placeholder="Timer (min)"
-                      className="w-32 px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950"
+                      className="w-32 px-3 py-1.5 bg-amber-50 dark:bg-gray-900 border border-amber-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 dark:text-white"
                     />
                   </div>
                 </div>
@@ -398,28 +398,28 @@ export const RecipeFormPage: React.FC = () => {
         </section>
 
         {/* Extra */}
-        <section className="bg-white rounded-2xl p-6 shadow-sm space-y-4">
-          <h2 className="font-semibold text-amber-950">Zusätzliche Infos</h2>
+        <section className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm space-y-4">
+          <h2 className="font-semibold text-amber-950 dark:text-white">Zusätzliche Infos</h2>
 
           <div>
-            <label className="block text-sm font-medium text-amber-700 mb-1">Notizen</label>
+            <label className="block text-sm font-medium text-amber-700 dark:text-gray-300 mb-1">Notizen</label>
             <textarea
               value={notes}
               onChange={e => setNotes(e.target.value)}
               placeholder="Tipps, Varianten, Anmerkungen..."
               rows={3}
-              className="w-full px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 resize-none"
+              className="w-full px-4 py-3 bg-amber-50 dark:bg-gray-900 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 dark:text-white resize-none"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-amber-700 mb-1">Quelle</label>
+            <label className="block text-sm font-medium text-amber-700 dark:text-gray-300 mb-1">Quelle</label>
             <input
               type="text"
               value={source}
               onChange={e => setSource(e.target.value)}
               placeholder="z.B. Omas Kochbuch, chefkoch.de..."
-              className="w-full px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950"
+              className="w-full px-4 py-3 bg-amber-50 dark:bg-gray-900 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-amber-950 dark:text-white"
             />
           </div>
         </section>
