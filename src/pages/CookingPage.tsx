@@ -12,6 +12,7 @@ import {
   Play,
   Pause,
   RotateCcw,
+  ChefHat,
 } from 'lucide-react';
 import { useRecipes } from '../hooks/useRecipes';
 import { useSpeech } from '../hooks/useSpeech';
@@ -579,7 +580,5 @@ export const CookingPage: React.FC = () => {
   );
 };
 
-// Import ChefHat for the empty state
-import { ChefHat } from 'lucide-react';
 
 export default CookingPage;
